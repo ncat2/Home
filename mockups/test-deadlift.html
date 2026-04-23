@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deadlift — Animation Test</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;-webkit-font-smoothing:antialiased;padding:48px 22px 96px;text-align:center;min-height:100vh}
+.eyebrow{font-size:14px;font-weight:600;color:#a1a1a6;letter-spacing:0.02em;margin-bottom:14px}
+h1{font-size:clamp(40px,7vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.04;margin-bottom:18px}
+.sub{font-size:19px;color:#a1a1a6;letter-spacing:-0.01em;max-width:540px;margin:0 auto 40px}
+.stage{width:min(420px,88vw);margin:0 auto;padding:28px;background:#0a0a0a;border:0.5px solid rgba(255,255,255,0.08);border-radius:24px}
+svg{display:block;width:100%;height:auto;color:#f5f5f7}
+.fig line,.fig circle{stroke:currentColor;fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.fig circle.head{fill:currentColor;stroke:none}
+.fig circle.plate{fill:currentColor;stroke:none}
+.fig line.floor{opacity:0.25;stroke-width:2.5}
+.fig line.bar{stroke-width:4}
+.cues{max-width:540px;margin:32px auto 0;text-align:left}
+.cues h3{font-size:13px;font-weight:600;color:#a1a1a6;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;padding:0 4px}
+.cues li{list-style:none;padding:14px 4px;border-top:0.5px solid rgba(255,255,255,0.12);font-size:16px;letter-spacing:-0.005em}
+.cues li:last-child{border-bottom:0.5px solid rgba(255,255,255,0.12)}
+.cues li b{font-weight:600;margin-right:8px}
+.note{margin-top:40px;font-size:13px;color:#86868b;max-width:540px;margin-left:auto;margin-right:auto}
+@media(prefers-reduced-motion:reduce){animate,animateTransform{display:none}}
+</style>
+</head>
+<body>
+
+<div class="eyebrow">Animation Test · Movement 01</div>
+<h1>Conventional Deadlift.</h1>
+<div class="sub">Every joint is articulated. The bar stays in the hands. If the figure does it right, so do you.</div>
+
+<div class="stage">
+<svg class="fig" viewBox="0 0 200 280" aria-hidden="true">
+  <!-- Floor reference -->
+  <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+
+  <!-- LEFT SIDE (back leg in side view) -->
+  <!-- Shin: ankle to knee -->
+  <line x1="100" y1="250" x2="108" y2="202">
+    <animate attributeName="x2" values="108;100;108" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y2" values="202;200;202" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </line>
+
+  <!-- Thigh: knee to hip -->
+  <line x1="108" y1="202" x2="70" y2="182">
+    <animate attributeName="x1" values="108;100;108" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y1" values="202;200;202" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="x2" values="70;100;70" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y2" values="182;150;182" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </line>
+
+  <!-- Torso: hip to shoulder (neutral spine straight line) -->
+  <line x1="70" y1="182" x2="100" y2="132">
+    <animate attributeName="x1" values="70;100;70" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y1" values="182;150;182" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="x2" values="100;100;100" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y2" values="132;68;132" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </line>
+
+  <!-- Head -->
+  <circle class="head" cx="108" cy="118" r="10">
+    <animate attributeName="cx" values="108;100;108" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="cy" values="118;54;118" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </circle>
+
+  <!-- Arm: shoulder to wrist (always vertical - gravity) -->
+  <line x1="100" y1="132" x2="100" y2="243">
+    <animate attributeName="y1" values="132;68;132" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y2" values="243;150;243" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </line>
+
+  <!-- Bar -->
+  <line class="bar" x1="72" y1="247" x2="128" y2="247">
+    <animate attributeName="y1" values="247;153;247" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+    <animate attributeName="y2" values="247;153;247" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </line>
+
+  <!-- Plates on bar -->
+  <circle class="plate" cx="72" cy="247" r="9">
+    <animate attributeName="cy" values="247;153;247" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </circle>
+  <circle class="plate" cx="128" cy="247" r="9">
+    <animate attributeName="cy" values="247;153;247" dur="3.2s" repeatCount="indefinite"
+             calcMode="spline" keyTimes="0;0.5;1"
+             keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+  </circle>
+
+  <!-- Foot (fixed) -->
+  <line x1="85" y1="250" x2="115" y2="250"/>
+</svg>
+</div>
+
+<ul class="cues">
+  <h3>What you should see</h3>
+  <li><b>1.</b> Feet planted, bar over mid-foot.</li>
+  <li><b>2.</b> Hips go back before the bar leaves the floor. Knees barely move.</li>
+  <li><b>3.</b> Back stays straight the whole time — torso rotates as one piece around the hip.</li>
+  <li><b>4.</b> Arms hang straight down like ropes. Bar tracks the shin, then the thigh.</li>
+  <li><b>5.</b> Lockout: hips and knees finish together. No leaning back.</li>
+</ul>
+
+<div class="note">If this animation looks like correct deadlift form to you, I'll propagate the technique (proper joint articulation, SMIL on line endpoints) to every exercise. If something's off, tell me what and I'll fix it before scaling up.</div>
+
+</body>
+</html>
