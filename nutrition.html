@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<title>Home — Nutrition</title>
+<style>
+:root {
+  --ink:#1d1d1f; --ink-2:#6e6e73; --ink-3:#86868b;
+  --paper:#fbfbfd; --off:#f5f5f7; --black:#000;
+  --link:#2997ff; --link-ink:#0066cc;
+  --line:rgba(255,255,255,0.1); --line-ink:rgba(0,0,0,0.1);
+  --accent:#30d158; --warn:#ff9f0a; --alert:#ff453a;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#000;color:var(--off)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",sans-serif;font-feature-settings:"ss01";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.1;padding-top:44px}
+.light{background:var(--paper);color:var(--ink)}
+.dark{background:var(--black);color:var(--off)}
+section{padding:76px 22px;text-align:center;overflow:hidden}
+.wrap{max-width:980px;margin:0 auto}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:0.04em;color:var(--ink-2);margin-bottom:12px;text-transform:uppercase}
+.dark .eyebrow{color:var(--ink-3)}
+h1.display{font-size:clamp(44px,9vw,84px);font-weight:700;letter-spacing:-0.04em;line-height:1.03;margin:0 0 18px}
+h2.headline{font-size:clamp(32px,6vw,56px);font-weight:700;letter-spacing:-0.035em;line-height:1.04;margin:0 0 14px}
+h3.title{font-size:clamp(24px,4vw,32px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin:0 0 10px}
+.sub{font-size:clamp(17px,2vw,21px);font-weight:400;letter-spacing:-0.01em;color:var(--ink-2);max-width:620px;margin:0 auto 24px}
+.dark .sub{color:var(--ink-3)}
+
+/* TOP NAV */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(0,0,0,0.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:0.5px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 22px;height:44px;font-size:13px;color:var(--off)}
+nav.top a{color:inherit;text-decoration:none;opacity:0.88}
+nav.top a:hover{opacity:1}
+nav.top .brand{font-weight:500;letter-spacing:-0.005em}
+.seg{display:inline-flex;gap:2px;background:rgba(255,255,255,0.08);border-radius:999px;padding:3px}
+.seg a{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:var(--ink-3);opacity:1}
+.seg a.active{background:var(--off);color:#000;font-weight:600}
+
+/* TARGET TILES */
+.targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:880px;margin:32px auto 0}
+.tile{background:rgba(255,255,255,0.04);border:0.5px solid var(--line);border-radius:22px;padding:24px 18px;text-align:left}
+.light .tile{background:#fff;border-color:var(--line-ink);box-shadow:0 1px 0 rgba(0,0,0,0.02)}
+.tile .lbl{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.light .tile .lbl{color:var(--ink-2)}
+.tile .val{font-size:34px;font-weight:700;letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
+.tile .unit{font-size:14px;color:var(--ink-3);font-weight:500}
+.light .tile .unit{color:var(--ink-2)}
+.tile .note{font-size:13px;color:var(--ink-3);letter-spacing:-0.005em;margin-top:8px;line-height:1.4}
+.light .tile .note{color:var(--ink-2)}
+.tile .accent{color:var(--accent)}
+.tile .warn{color:var(--warn)}
+
+/* SECTION INNER STYLES */
+.swap{max-width:520px;margin:18px auto 0;text-align:left;font-size:13px;color:var(--ink-3);letter-spacing:-0.005em;padding:12px 14px;background:rgba(255,255,255,0.04);border-radius:10px}
+.light .swap{background:rgba(0,0,0,0.04);color:var(--ink-2)}
+.swap b{color:var(--off);font-weight:600;margin-right:6px}
+.light .swap b{color:var(--ink)}
+
+/* COLLAPSIBLE BLOCKS (reused from workout) */
+.block{max-width:760px;margin:0 auto;padding:32px 20px;border-radius:22px;text-align:left;background:rgba(255,255,255,0.04)}
+.light .block{background:rgba(0,0,0,0.035)}
+.block h4{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
+.light .block h4{color:var(--ink-2)}
+.block h3{font-size:24px;font-weight:700;letter-spacing:-0.025em;margin:0 0 14px}
+
+.list{margin-top:6px;counter-reset:li}
+.li{counter-increment:li;border-top:0.5px solid var(--line)}
+.light .li{border-top-color:var(--line-ink)}
+.li:last-child{border-bottom:0.5px solid var(--line)}
+.light .li:last-child{border-bottom-color:var(--line-ink)}
+.li summary{list-style:none;cursor:pointer;padding:14px 34px 14px 30px;position:relative;font-size:15px;letter-spacing:-0.005em;line-height:1.4;user-select:none;-webkit-user-select:none}
+.li summary::-webkit-details-marker{display:none}
+.li summary::before{content:counter(li);position:absolute;left:2px;top:15px;font-size:12px;font-weight:600;color:var(--ink-3)}
+.light .li summary::before{color:var(--ink-2)}
+.li summary::after{content:"";position:absolute;right:12px;top:19px;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);opacity:0.45;transition:transform .2s}
+.li[open] summary::after{transform:rotate(-135deg);top:22px}
+.li summary b{font-weight:600;margin-right:6px}
+.li summary span{color:var(--ink-3);font-size:13px;margin-left:4px}
+.light .li summary span{color:var(--ink-2)}
+.li-body{padding:4px 14px 18px 30px;font-size:14px;color:var(--ink-3);letter-spacing:-0.005em;line-height:1.5}
+.light .li-body{color:var(--ink-2)}
+.li-body p{margin-bottom:8px}
+.li-body p:last-child{margin-bottom:0}
+.li-body b{font-weight:600;color:var(--off)}
+.light .li-body b{color:var(--ink)}
+
+/* MACRO ROW */
+.macros{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 4px;padding:10px 0;border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
+.light .macros{border-color:var(--line-ink)}
+.macro{flex:1;min-width:60px}
+.macro b{display:block;font-size:18px;font-weight:700;color:var(--off);letter-spacing:-0.02em;line-height:1}
+.light .macro b{color:var(--ink)}
+.macro span{display:block;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);margin-top:5px}
+.light .macro span{color:var(--ink-2)}
+.macro.warn b{color:var(--warn)}
+.macro.alert b{color:var(--alert)}
+
+/* SUPPLEMENT CARDS */
+.supps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:980px;margin:32px auto 0;text-align:left}
+.supp{background:#fff;border-radius:24px;padding:28px 24px;color:var(--ink)}
+.dark .supp{background:#111;color:var(--off)}
+.supp .pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-2);background:rgba(0,0,0,0.05);padding:5px 10px;border-radius:999px;margin-bottom:14px}
+.dark .supp .pill{color:var(--ink-3);background:rgba(255,255,255,0.06)}
+.supp h3{font-size:24px;font-weight:700;letter-spacing:-0.025em;margin:0 0 4px;color:inherit}
+.supp .brand{font-size:14px;color:var(--ink-2);margin-bottom:18px}
+.dark .supp .brand{color:var(--ink-3)}
+.supp .row{display:flex;justify-content:space-between;padding:9px 0;border-top:0.5px solid var(--line-ink);font-size:14px}
+.dark .supp .row{border-top-color:var(--line)}
+.supp .row:first-of-type{border-top:none}
+.supp .row b{font-weight:600;color:var(--ink-2)}
+.dark .supp .row b{color:var(--ink-3)}
+.supp .why{margin-top:14px;font-size:14px;line-height:1.5;color:var(--ink-2);letter-spacing:-0.005em}
+.dark .supp .why{color:var(--ink-3)}
+
+/* CALL-OUT */
+.callout{max-width:680px;margin:32px auto 0;padding:22px 24px;border-radius:18px;text-align:left;background:rgba(255,159,10,0.08);border:0.5px solid rgba(255,159,10,0.3)}
+.callout.alert{background:rgba(255,69,58,0.08);border-color:rgba(255,69,58,0.3)}
+.callout.ok{background:rgba(48,209,88,0.08);border-color:rgba(48,209,88,0.3)}
+.callout h4{font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--warn);margin-bottom:8px}
+.callout.alert h4{color:var(--alert)}
+.callout.ok h4{color:var(--accent)}
+.callout p{font-size:15px;line-height:1.5;letter-spacing:-0.005em;color:var(--ink-3)}
+.light .callout p{color:var(--ink-2)}
+.callout p + p{margin-top:8px}
+.callout b{color:var(--off);font-weight:600}
+.light .callout b{color:var(--ink)}
+
+@media(prefers-reduced-motion:reduce){animate,animateTransform{display:none}}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">Home</div>
+  <div class="seg">
+    <a href="workout.html">Workout</a>
+    <a href="nutrition.html" class="active">Nutrition</a>
+  </div>
+  <a href="#top">Top</a>
+</nav>
+
+<!-- HERO -->
+<section class="dark" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Nutrition</div>
+    <h1 class="display">Eat for size.</h1>
+    <div class="sub">A surplus, every day. Protein high, sodium reasonable, heart taken care of. Built for the workout plan.</div>
+  </div>
+</section>
+
+<!-- DAILY TARGETS -->
+<section class="light">
+  <div class="wrap">
+    <div class="eyebrow">Daily Targets</div>
+    <h2 class="headline">Hit these, every day.</h2>
+    <div class="sub">Calculated for 6'2", 150 lb, 26 yo, lifting 5×/week. Aiming for ~0.8 lb/week of mostly muscle.</div>
+    <div class="targets">
+      <div class="tile">
+        <div class="lbl">Calories</div>
+        <div class="val accent">3,300</div>
+        <div class="unit">kcal / day</div>
+        <div class="note">Maintenance ≈ 2,800. A 500 kcal surplus drives ~0.8 lb/week.</div>
+      </div>
+      <div class="tile">
+        <div class="lbl">Protein</div>
+        <div class="val accent">165 g</div>
+        <div class="unit">~1.1 g per lb</div>
+        <div class="note">Spread across 3-5 meals/snacks. The single most important macro for muscle gain.</div>
+      </div>
+      <div class="tile">
+        <div class="lbl">Sodium</div>
+        <div class="val warn">&lt; 2,300 mg</div>
+        <div class="unit">aim 1,500-2,300</div>
+        <div class="note">FDA cap. Lower end ideal for heart health, especially given the arrhythmia.</div>
+      </div>
+      <div class="tile">
+        <div class="lbl">Water</div>
+        <div class="val accent">~1 gal</div>
+        <div class="unit">3.8 L / day</div>
+        <div class="note">Floor, not ceiling. Creatine pulls water into the muscle — drink more.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSERT POINT -->
+
+</body>
+</html>
