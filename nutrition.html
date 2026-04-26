@@ -85,6 +85,17 @@ nav.top .brand{font-weight:500;letter-spacing:-0.005em}
 .li-body b{font-weight:600;color:var(--off)}
 .light .li-body b{color:var(--ink)}
 
+/* TIERS (within meals block) */
+.tier{margin-top:22px}
+.tier:first-of-type{margin-top:8px}
+.tier-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);padding:0 4px 4px}
+.light .tier-head{color:var(--ink-2)}
+.tier-head .freq{font-weight:500;letter-spacing:0;text-transform:none;font-size:12px;opacity:0.75}
+.tier-head.best{color:var(--accent)}
+.tier-head.warn-h{color:var(--warn)}
+.tier-head.alert-h{color:var(--alert)}
+.tier .list{counter-reset:li}
+
 /* MACRO ROW */
 .macros{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 4px;padding:10px 0;border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
 .light .macros{border-color:var(--line-ink)}
@@ -221,7 +232,7 @@ nav.top .brand{font-weight:500;letter-spacing:-0.005em}
         <div class="row"><b>Carbs</b><span>2 g (1 g sugar)</span></div>
         <div class="row"><b>Sodium</b><span>100 mg</span></div>
         <div class="row"><b>Timing</b><span>Post-workout or any time you're short on protein</span></div>
-        <div class="why"><b>Why.</b> Hydrolyzed whey isolate — fast absorbing, low fat/sugar, clean macro hit. One scoop closes the daily protein gap when meals fall short. Promix grass-fed whey is a clean alternative (~25 g protein per 2-scoop serving, ~135 cal).</div>
+        <div class="why"><b>Why.</b> Hydrolyzed whey isolate — fast absorbing, low fat/sugar, low sodium, clean macro hit. One scoop closes the daily protein gap when meals fall short.</div>
       </div>
 
     </div>
@@ -318,90 +329,179 @@ nav.top .brand{font-weight:500;letter-spacing:-0.005em}
 
     <div class="block" style="margin-top:18px">
       <h4>Dinner · ~1 of these</h4>
-      <h3>The "where you eat" decision.</h3>
-      <div class="list">
+      <h3>Tiered. Eat from Tier 1 most nights.</h3>
 
-        <details class="li">
-          <summary><b>Salmon + rice (home).</b> 6 oz salmon, 1.5 cup rice.<span>~700 cal</span></summary>
-          <div class="li-body">
-            <div class="macros">
-              <div class="macro"><b>700</b><span>kcal</span></div>
-              <div class="macro"><b>50 g</b><span>Protein</span></div>
-              <div class="macro"><b>70 g</b><span>Carbs</span></div>
-              <div class="macro"><b>22 g</b><span>Fat</span></div>
-              <div class="macro"><b>250 mg</b><span>Sodium</span></div>
+      <div class="tier">
+        <div class="tier-head best">★ Tier 1 — Base of rotation<span class="freq">5 nights / week</span></div>
+        <div class="list">
+
+          <details class="li">
+            <summary><b>Salmon + rice (home).</b> 6 oz salmon, 1.5 cup rice, side veg.<span>~700 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>700</b><span>kcal</span></div>
+                <div class="macro"><b>50 g</b><span>Protein</span></div>
+                <div class="macro"><b>70 g</b><span>Carbs</span></div>
+                <div class="macro"><b>22 g</b><span>Fat</span></div>
+                <div class="macro"><b>250 mg</b><span>Sodium</span></div>
+              </div>
+              <p><b>Best dinner on the list.</b> High protein, low sodium, omega-3s. <b>Aim for 2 nights/week.</b></p>
             </div>
-            <p><b>Best dinner on the list.</b> High protein, low sodium, omega-3s. Rotate this in 2-3×/week if you can.</p>
-          </div>
-        </details>
+          </details>
 
-        <details class="li">
-          <summary><b>Ground beef + rice + veggies.</b> Chipotle/taco style.<span>~800 cal</span></summary>
-          <div class="li-body">
-            <div class="macros">
-              <div class="macro"><b>800</b><span>kcal</span></div>
-              <div class="macro"><b>50 g</b><span>Protein</span></div>
-              <div class="macro"><b>70 g</b><span>Carbs</span></div>
-              <div class="macro"><b>30 g</b><span>Fat</span></div>
-              <div class="macro"><b>600 mg</b><span>Sodium</span></div>
+          <details class="li">
+            <summary><b>Ground beef + rice + veggies (home).</b> Taco/chipotle style.<span>~800 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>800</b><span>kcal</span></div>
+                <div class="macro"><b>50 g</b><span>Protein</span></div>
+                <div class="macro"><b>70 g</b><span>Carbs</span></div>
+                <div class="macro"><b>30 g</b><span>Fat</span></div>
+                <div class="macro"><b>600 mg</b><span>Sodium</span></div>
+              </div>
+              <p>8 oz 90/10 ground beef, 1.5 cup rice, peppers/onions, taco seasoning, salsa. <b>Aim for 1 night/week.</b></p>
+              <p><b>Lean tip.</b> 90/10 over 80/20 keeps saturated fat in check.</p>
             </div>
-            <p><b>Solid.</b> 8 oz 90/10 ground beef, 1.5 cup rice, peppers/onions, taco seasoning, salsa. Dark leafy greens on the side bumps micronutrients.</p>
-            <p><b>Lean tip.</b> 90/10 over 80/20 to keep saturated fat in check (heart-friendlier).</p>
-          </div>
-        </details>
+          </details>
 
-        <details class="li">
-          <summary><b>KazuNori — 6 hand rolls.</b> Sushi night.<span>~800 cal</span></summary>
-          <div class="li-body">
-            <div class="macros">
-              <div class="macro"><b>800</b><span>kcal</span></div>
-              <div class="macro"><b>35 g</b><span>Protein</span></div>
-              <div class="macro"><b>110 g</b><span>Carbs</span></div>
-              <div class="macro"><b>22 g</b><span>Fat</span></div>
-              <div class="macro warn"><b>1,500 mg</b><span>Sodium</span></div>
+          <details class="li">
+            <summary><b>Chicken thighs + rice + veggies (home).</b> 8 oz thighs, jasmine rice, sautéed veg.<span>~780 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>780</b><span>kcal</span></div>
+                <div class="macro"><b>55 g</b><span>Protein</span></div>
+                <div class="macro"><b>75 g</b><span>Carbs</span></div>
+                <div class="macro"><b>26 g</b><span>Fat</span></div>
+                <div class="macro"><b>260 mg</b><span>Sodium</span></div>
+              </div>
+              <p>Boneless skinless thighs hold flavor better than breast and stay juicy with minimal effort. Salt-and-pepper, sear, finish in oven. <b>Aim for 1 night/week.</b></p>
             </div>
-            <p><b>Sodium catch.</b> Rice itself is fine; soy sauce stacks fast. Use sparingly or ask for low-sodium soy.</p>
-            <p><b>Protein note.</b> Fish-based hand rolls give more protein than veggie ones — lean toward salmon/tuna/yellowtail.</p>
-          </div>
-        </details>
+          </details>
 
-        <details class="li">
-          <summary><b>Chick-fil-A #1 combo.</b> Sandwich + lemonade + large fries.<span>~1,400 cal</span></summary>
-          <div class="li-body">
-            <div class="macros">
-              <div class="macro"><b>1,400</b><span>kcal</span></div>
-              <div class="macro"><b>45 g</b><span>Protein</span></div>
-              <div class="macro"><b>175 g</b><span>Carbs</span></div>
-              <div class="macro"><b>60 g</b><span>Fat</span></div>
-              <div class="macro alert"><b>1,900 mg</b><span>Sodium</span></div>
+          <details class="li">
+            <summary><b>Steak + sweet potato + greens (home).</b> 8 oz sirloin, baked sweet potato, broccoli.<span>~800 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>800</b><span>kcal</span></div>
+                <div class="macro"><b>72 g</b><span>Protein</span></div>
+                <div class="macro"><b>40 g</b><span>Carbs</span></div>
+                <div class="macro"><b>30 g</b><span>Fat</span></div>
+                <div class="macro"><b>320 mg</b><span>Sodium</span></div>
+              </div>
+              <p>Best post-Legs-day meal. Heavy protein, recovery-friendly carbs, micronutrients from the greens. <b>Aim for 1 night/week — Wednesday.</b></p>
             </div>
-            <p><b>Sodium &amp; sugar.</b> Sandwich brine + fries + sweet lemonade = full day's sodium and ~50 g of added sugar in one sitting.</p>
-            <p><b>Better order.</b> Grilled chicken sandwich, regular fries, unsweet tea. Cuts sodium ~400 mg, sugar ~45 g, calories ~250.</p>
-          </div>
-        </details>
+          </details>
 
-        <details class="li">
-          <summary><b>Panda Express.</b> Double orange chicken + fried rice.<span>~1,500 cal</span></summary>
-          <div class="li-body">
-            <div class="macros">
-              <div class="macro"><b>1,500</b><span>kcal</span></div>
-              <div class="macro"><b>50 g</b><span>Protein</span></div>
-              <div class="macro"><b>175 g</b><span>Carbs</span></div>
-              <div class="macro"><b>60 g</b><span>Fat</span></div>
-              <div class="macro alert"><b>2,500 mg</b><span>Sodium</span></div>
-            </div>
-            <p><b>Sodium alert.</b> Highest-sodium meal on the list. Single sitting blows past your full daily ceiling. <b>Treat as 1×/2 weeks max for heart.</b></p>
-            <p><b>Better order.</b> String bean chicken breast + steamed white rice. Same protein, ~1,200 mg less sodium, ~700 fewer calories — leaves room for a smoothie/snack later.</p>
-          </div>
-        </details>
-
+        </div>
       </div>
+
+      <div class="tier">
+        <div class="tier-head">Tier 2 — Fast / social<span class="freq">1 night / week</span></div>
+        <div class="list">
+
+          <details class="li">
+            <summary><b>Chipotle bowl.</b> Double chicken, brown rice, black beans, fajita veg, salsa, guac. No cheese/sour cream.<span>~975 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>975</b><span>kcal</span></div>
+                <div class="macro"><b>80 g</b><span>Protein</span></div>
+                <div class="macro"><b>80 g</b><span>Carbs</span></div>
+                <div class="macro"><b>43 g</b><span>Fat</span></div>
+                <div class="macro warn"><b>1,950 mg</b><span>Sodium</span></div>
+              </div>
+              <p><b>Best fast option.</b> Massive protein hit, vegetables, no fryer. Sodium is moderate-high but the protein/calorie ratio is unmatched in fast food.</p>
+              <p><b>Lower sodium order:</b> swap mild salsa for fresh tomato salsa (-200 mg), no chips, ask for half-portion of beans.</p>
+            </div>
+          </details>
+
+          <details class="li">
+            <summary><b>KazuNori — 6 hand rolls.</b> Sushi night.<span>~800 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>800</b><span>kcal</span></div>
+                <div class="macro"><b>35 g</b><span>Protein</span></div>
+                <div class="macro"><b>110 g</b><span>Carbs</span></div>
+                <div class="macro"><b>22 g</b><span>Fat</span></div>
+                <div class="macro warn"><b>1,500 mg</b><span>Sodium</span></div>
+              </div>
+              <p><b>Sodium watch.</b> Rice is fine; soy sauce stacks fast. Use sparingly or ask for low-sodium soy.</p>
+              <p><b>Protein move.</b> Lean toward salmon/tuna/yellowtail rolls — fish rolls double the protein vs. veggie ones.</p>
+            </div>
+          </details>
+
+          <details class="li">
+            <summary><b>Poke bowl.</b> Sweetfin or Pokeworks — salmon/tuna, brown rice, edamame, cucumber, seaweed, avocado.<span>~700 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>700</b><span>kcal</span></div>
+                <div class="macro"><b>40 g</b><span>Protein</span></div>
+                <div class="macro"><b>80 g</b><span>Carbs</span></div>
+                <div class="macro"><b>20 g</b><span>Fat</span></div>
+                <div class="macro warn"><b>1,200 mg</b><span>Sodium</span></div>
+              </div>
+              <p>Cleaner than sushi rolls (less rice, more fish). Skip ponzu/spicy mayo to drop sodium another ~300 mg.</p>
+              <p><b>To bulk it up:</b> double protein and add a side of edamame — pushes to ~900 cal, 55 g protein.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-head warn-h">Tier 3 — Limit hard<span class="freq">1 night every 2 weeks (max)</span></div>
+        <div class="list">
+
+          <details class="li">
+            <summary><b>Chick-fil-A #1 combo.</b> Sandwich + lemonade + large fries.<span>~1,400 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>1,400</b><span>kcal</span></div>
+                <div class="macro"><b>45 g</b><span>Protein</span></div>
+                <div class="macro"><b>175 g</b><span>Carbs</span></div>
+                <div class="macro"><b>60 g</b><span>Fat</span></div>
+                <div class="macro alert"><b>1,900 mg</b><span>Sodium</span></div>
+              </div>
+              <p><b>Frequency:</b> 1× every 2 weeks max. The full daily sodium and ~50 g added sugar in one meal.</p>
+              <p><b>Better order:</b> Grilled chicken sandwich, regular fries, unsweet tea. Drops sodium ~400 mg, sugar ~45 g, calories ~250 — and you can order it more often without guilt.</p>
+            </div>
+          </details>
+
+          <details class="li">
+            <summary><b>Panda Express.</b> Double orange chicken + fried rice.<span>~1,500 cal</span></summary>
+            <div class="li-body">
+              <div class="macros">
+                <div class="macro"><b>1,500</b><span>kcal</span></div>
+                <div class="macro"><b>50 g</b><span>Protein</span></div>
+                <div class="macro"><b>175 g</b><span>Carbs</span></div>
+                <div class="macro"><b>60 g</b><span>Fat</span></div>
+                <div class="macro alert"><b>2,500 mg</b><span>Sodium</span></div>
+              </div>
+              <p><b>Frequency:</b> 1× every 2 weeks max — or skip entirely. Highest-sodium meal on the list, blows your full daily ceiling in one sitting.</p>
+              <p><b>Better order:</b> String bean chicken breast + steamed white rice + side of mixed veg. Same ~50 g protein, ~1,300 mg less sodium, ~700 fewer calories.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
     </div>
 
     <div class="callout ok" style="margin-top:32px">
+      <h4>Weekly rotation — what a strong week looks like</h4>
+      <p><b>Mon · Push</b> — Salmon + rice (home)<br/>
+      <b>Tue · Pull</b> — Ground beef + rice + veggies (home)<br/>
+      <b>Wed · Legs</b> — Steak + sweet potato + greens (home)<br/>
+      <b>Thu · Delts</b> — Chicken thighs + rice + veggies (home)<br/>
+      <b>Fri · Arms</b> — Salmon + rice (home)<br/>
+      <b>Sat · Rest</b> — Tier 2 pick: Chipotle, sushi, or poke<br/>
+      <b>Sun · Rest</b> — Tier 2 pick or family/leftovers</p>
+      <p><b>5 home dinners · 1 fast/social dinner · 1 flexible.</b> Tier 3 (Chick-fil-A / Panda) only on the off-weekend, replacing a Tier 2 slot.</p>
+    </div>
+
+    <div class="callout ok" style="margin-top:18px">
       <h4>Sample 3,300-calorie day</h4>
-      <p><b>Protein smoothie</b> (600) + <b>Glaze teriyaki</b> (1,100) + <b>Salmon &amp; rice</b> (700) + <b>1 protein shake + handful of almonds + apple</b> (~300) = <b>~2,700 cal, 190 g protein, ~2,250 mg sodium</b>.</p>
-      <p>You're under by 500-600 cal. Easy fix: 2 cups milk through the day (300 cal), 1 extra tbsp peanut butter (90 cal), or upsize the rice at lunch.</p>
+      <p><b>Protein smoothie</b> (600) + <b>Glaze teriyaki</b> (1,100) + <b>Salmon &amp; rice</b> (700) + <b>Whey shake + handful of almonds + apple</b> (~300) = <b>~2,700 cal, 190 g protein, ~2,250 mg sodium</b>.</p>
+      <p>Under by 500-600 cal. Easy fixes: 2 cups whole milk through the day (300 cal), extra tbsp peanut butter (90 cal), or upsize rice at lunch.</p>
     </div>
   </div>
 </section>
