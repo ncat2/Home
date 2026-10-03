@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<title>Home — Workout</title>
+<style>
+:root{--ink:#1d1d1f;--ink-2:#6e6e73;--ink-3:#86868b;--paper:#fbfbfd;--off:#f5f5f7;--black:#000;--link:#2997ff;--link-ink:#0066cc;--line:rgba(255,255,255,0.1);--line-ink:rgba(0,0,0,0.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#000;color:var(--off)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",sans-serif;font-feature-settings:"ss01";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.1;padding-top:88px}
+.light{background:var(--paper);color:var(--ink)}
+.dark{background:var(--black);color:var(--off)}
+section{padding:76px 22px;text-align:center;overflow:hidden}
+.wrap{max-width:980px;margin:0 auto}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:0.04em;color:var(--ink-2);margin-bottom:12px;text-transform:uppercase}
+.dark .eyebrow{color:var(--ink-3)}
+h1.display{font-size:clamp(44px,9vw,84px);font-weight:700;letter-spacing:-0.04em;line-height:1.03;margin:0 0 18px}
+h2.headline{font-size:clamp(32px,6vw,56px);font-weight:700;letter-spacing:-0.035em;line-height:1.04;margin:0 0 14px}
+h3.title{font-size:clamp(26px,4.5vw,38px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin:0 0 10px}
+.sub{font-size:clamp(17px,2vw,21px);font-weight:400;letter-spacing:-0.01em;color:var(--ink-2);max-width:620px;margin:0 auto 24px}
+.dark .sub{color:var(--ink-3)}
+.links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:17px;margin-top:8px}
+.links a{color:var(--link-ink);text-decoration:none;font-weight:400;letter-spacing:-0.005em}
+.dark .links a{color:var(--link)}
+.links a:hover{text-decoration:underline}
+.links a::after{content:" ›"}
+
+/* TOP NAV */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(0,0,0,0.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:0.5px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 22px;height:44px;font-size:13px;color:var(--off)}
+nav.top a{color:inherit;text-decoration:none;opacity:0.88}
+nav.top a:hover{opacity:1}
+nav.top .brand{font-weight:500;letter-spacing:-0.005em}
+
+/* DAY SELECTOR (sticky below nav) */
+.day-bar{position:fixed;top:44px;left:0;right:0;z-index:55;background:rgba(0,0,0,0.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:0.5px solid var(--line);padding:0 14px;height:44px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.day-bar::-webkit-scrollbar{display:none}
+.day-bar .pill{flex:0 0 auto;background:transparent;border:none;color:#a1a1a6;font:inherit;font-size:13px;font-weight:500;letter-spacing:-0.005em;padding:7px 14px;margin:0 2px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+.day-bar .pill:hover{color:var(--off)}
+.day-bar .pill.active{background:var(--off);color:#000;font-weight:600}
+.day-bar .pill small{font-weight:400;opacity:0.7;margin-right:6px}
+
+/* FIGURE SYSTEM */
+.fig{display:block;margin:0 auto;color:currentColor}
+.fig svg{display:block;margin:0 auto;width:100%;height:auto;overflow:visible}
+.fig line,.fig circle,.fig rect,.fig path{stroke:currentColor;fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fig circle.head,.fig circle.plate,.fig circle.dot{fill:currentColor;stroke:none}
+.fig line.floor,.fig line.ref{opacity:0.22;stroke-width:2.5}
+.fig line.equip,.fig rect.equip{opacity:0.85}
+.fig line.bar{stroke-width:4}
+
+/* EXERCISE CARD */
+.ex{padding:56px 22px 48px;border-top:0.5px solid var(--line);scroll-margin-top:100px}
+.ex.light{border-top-color:var(--line-ink)}
+.ex:first-of-type{border-top:none}
+.ex-num{display:block;font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.light .ex-num{color:var(--ink-2)}
+.ex-fig{width:min(360px,72vw);margin:26px auto 26px}
+.stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px;font-size:13px;color:var(--ink-2);letter-spacing:0.005em}
+.dark .stats{color:var(--ink-3)}
+.stats > div{min-width:70px}
+.stats b{display:block;font-size:28px;font-weight:700;color:inherit;letter-spacing:-0.025em;line-height:1;margin-bottom:6px}
+.dark .stats b{color:var(--off)}
+.light .stats b{color:var(--ink)}
+.stats span{display:block;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase}
+.cues{max-width:520px;margin:20px auto 0;text-align:left}
+.cues li{list-style:none;padding:12px 0;border-top:0.5px solid var(--line);font-size:16px;letter-spacing:-0.005em;font-weight:400;line-height:1.35}
+.light .cues li{border-top-color:var(--line-ink)}
+.cues li:last-child{border-bottom:0.5px solid var(--line)}
+.light .cues li:last-child{border-bottom-color:var(--line-ink)}
+.cues li b{font-weight:600;margin-right:8px}
+.swap{max-width:520px;margin:18px auto 0;text-align:left;font-size:13px;color:var(--ink-3);letter-spacing:-0.005em;padding:12px 14px;background:rgba(255,255,255,0.04);border-radius:10px}
+.light .swap{background:rgba(0,0,0,0.04);color:var(--ink-2)}
+.swap b{color:var(--off);font-weight:600;margin-right:6px}
+.light .swap b{color:var(--ink)}
+
+/* WARMUP / COOLDOWN BLOCKS */
+.block{max-width:720px;margin:0 auto;padding:32px 20px;border-radius:22px;text-align:left;background:rgba(255,255,255,0.04)}
+.light .block{background:rgba(0,0,0,0.035)}
+.block h4{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
+.light .block h4{color:var(--ink-2)}
+.block h3{font-size:24px;font-weight:700;letter-spacing:-0.025em;margin:0 0 14px}
+.block ol{list-style:none;counter-reset:w;padding:0}
+.block ol li{counter-increment:w;padding:11px 0 11px 34px;border-top:0.5px solid var(--line);position:relative;font-size:15px;letter-spacing:-0.005em;line-height:1.4}
+.light .block ol li{border-top-color:var(--line-ink)}
+.block ol li:first-child{border-top:none}
+.block ol li::before{content:counter(w);position:absolute;left:0;top:12px;font-size:12px;font-weight:600;color:var(--ink-3);letter-spacing:0.04em}
+.light .block ol li::before{color:var(--ink-2)}
+.block ol li b{font-weight:600;margin-right:6px}
+.block ol li span{color:var(--ink-3);font-size:13px;margin-left:4px}
+.light .block ol li span{color:var(--ink-2)}
+
+/* COLLAPSIBLE WARMUPS */
+.wups{margin-top:6px;counter-reset:wup}
+.wup{counter-increment:wup;border-top:0.5px solid var(--line)}
+.light .wup{border-top-color:var(--line-ink)}
+.wup:last-child{border-bottom:0.5px solid var(--line)}
+.light .wup:last-child{border-bottom-color:var(--line-ink)}
+.wup summary{list-style:none;cursor:pointer;padding:14px 34px 14px 30px;position:relative;font-size:15px;letter-spacing:-0.005em;line-height:1.4;user-select:none;-webkit-user-select:none}
+.wup summary::-webkit-details-marker{display:none}
+.wup summary::before{content:counter(wup);position:absolute;left:2px;top:15px;font-size:12px;font-weight:600;color:var(--ink-3)}
+.light .wup summary::before{color:var(--ink-2)}
+.wup summary::after{content:"";position:absolute;right:12px;top:19px;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);opacity:0.45;transition:transform .2s}
+.wup[open] summary::after{transform:rotate(-135deg);top:22px}
+.wup summary b{font-weight:600;margin-right:6px}
+.wup summary span{color:var(--ink-3);font-size:13px;margin-left:4px}
+.light .wup summary span{color:var(--ink-2)}
+.wup-body{padding:4px 14px 20px 30px;display:flex;gap:18px;align-items:center}
+.wup-fig{flex:0 0 130px}
+.wup-fig svg{display:block;width:130px;height:auto;color:currentColor}
+.wup-fig svg line,.wup-fig svg circle,.wup-fig svg rect,.wup-fig svg path{stroke:currentColor;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.wup-fig svg circle.head,.wup-fig svg circle.dot{fill:currentColor;stroke:none}
+.wup-fig svg line.ref{opacity:0.22;stroke-width:1.8}
+.wup-fig svg line.equip,.wup-fig svg rect.equip{opacity:0.85}
+.wup-cue{flex:1;font-size:14px;color:var(--ink-3);line-height:1.45;letter-spacing:-0.005em}
+.light .wup-cue{color:var(--ink-2)}
+@media (max-width:520px){
+  .wup-body{flex-direction:column;align-items:center;gap:10px}
+  .wup-cue{align-self:flex-start}
+}
+
+/* DAY HEADER */
+.day-head{padding:68px 22px 34px;text-align:center}
+
+/* FOOTER */
+footer.end{padding:96px 22px}
+
+/* Hidden days */
+.day{display:none}
+.day.active{display:block}
+
+@media(prefers-reduced-motion:reduce){animate,animateTransform{display:none}}
+</style>
+</head>
+<body id="top">
+
+<nav class="top">
+  <div class="brand">Home</div>
+  <a href="#top">Top</a>
+</nav>
+
+<div class="day-bar" id="dayBar">
+  <button class="pill" data-day="1">Push</button>
+  <button class="pill active" data-day="2">Pull</button>
+  <button class="pill" data-day="3">Legs</button>
+  <button class="pill" data-day="4">Delts</button>
+  <button class="pill" data-day="5">Arms</button>
+</div>
+
+<!-- DAY 1 PUSH -->
+<div class="day" data-day="1">
+  <section class="dark day-head" id="top1">
+    <h1 class="display">Push.</h1>
+    <div class="sub">Chest, triceps, and front delts. Press heavy early, chase volume late.</div>
+  </section>
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Warm-up · 6 min</h4>
+      <h3>Mobilise shoulders. Prep the press.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Rowing machine.</b> Easy pace.<span>3 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="equip" cx="180" cy="84" r="10" fill="none"/>
+              <line class="equip" x1="168" y1="86" x2="168" y2="68"/>
+              <rect class="equip" x="70" y="96" width="22" height="5" rx="1" fill="currentColor"><animate attributeName="x" values="75;50;75" dur="2.2s" repeatCount="indefinite"/></rect>
+              <circle class="head" cx="88" cy="38" r="7"><animate attributeName="cx" values="88;62;88" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line x1="88" y1="45" x2="82" y2="90"><animate attributeName="x1" values="88;62;88" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="85" y1="52" x2="150" y2="78"><animate attributeName="x1" values="85;58;85" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <circle class="dot" cx="155" cy="82" r="3"><animate attributeName="cx" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line class="equip" x1="180" y1="84" x2="155" y2="82" stroke-dasharray="2 2"><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="82" y1="90" x2="160" y2="96"><animate attributeName="x1" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Long, smooth strokes. Legs drive first, then hips, then arms. Inhale on the recovery.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Band pull-aparts.</b> Chest high, pinch blades together.<span>2 × 15</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="8"/>
+              <line x1="100" y1="30" x2="100" y2="82"/>
+              <line x1="88" y1="40" x2="112" y2="40"/>
+              <line x1="100" y1="82" x2="90" y2="105"/>
+              <line x1="100" y1="82" x2="110" y2="105"/>
+              <line x1="88" y1="40" x2="60" y2="50"><animate attributeName="x2" values="70;30;70" dur="1.6s" repeatCount="indefinite"/><animate attributeName="y2" values="52;48;52" dur="1.6s" repeatCount="indefinite"/></line>
+              <line x1="112" y1="40" x2="140" y2="50"><animate attributeName="x2" values="130;170;130" dur="1.6s" repeatCount="indefinite"/><animate attributeName="y2" values="52;48;52" dur="1.6s" repeatCount="indefinite"/></line>
+              <path d="M 70 52 Q 100 60 130 52" stroke-dasharray="3 3" class="equip"><animate attributeName="d" values="M 70 52 Q 100 60 130 52; M 30 48 Q 100 75 170 48; M 70 52 Q 100 60 130 52" dur="1.6s" repeatCount="indefinite"/></path>
+            </svg></div>
+            <div class="wup-cue">Arms straight, no shrug. Pull the band apart until it touches the chest. Slow return.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Scapular push-ups.</b> Hands on the bar or floor, protract/retract.<span>2 × 10</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <line x1="40" y1="98" x2="40" y2="70"><animate attributeName="y2" values="70;64;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <circle class="head" cx="28" cy="64" r="7"><animate attributeName="cy" values="64;58;64" dur="2.4s" repeatCount="indefinite"/></circle>
+              <line x1="40" y1="70" x2="130" y2="70"><animate attributeName="y1" values="70;64;70" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y2" values="70;67;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <line x1="130" y1="70" x2="160" y2="88"><animate attributeName="y1" values="70;67;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <line x1="160" y1="88" x2="175" y2="98"/>
+            </svg></div>
+            <div class="wup-cue">Push-up position with locked arms. Only the shoulder blades move — protract (up) and retract (down). No elbow bend.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Arm circles.</b> Controlled, small then large.<span>10 each direction</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="8"/>
+              <line x1="100" y1="30" x2="100" y2="82"/>
+              <line x1="100" y1="82" x2="90" y2="105"/>
+              <line x1="100" y1="82" x2="110" y2="105"/>
+              <line x1="88" y1="40" x2="112" y2="40"/>
+              <line x1="88" y1="40" x2="50" y2="40"><animate attributeName="x2" values="50;88;88;50;50" dur="2.5s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/><animate attributeName="y2" values="40;10;40;70;40" dur="2.5s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="112" y1="40" x2="150" y2="40"><animate attributeName="x2" values="150;112;112;150;150" dur="2.5s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/><animate attributeName="y2" values="40;10;40;70;40" dur="2.5s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+            </svg></div>
+            <div class="wup-cue">Small controlled circles first. Build to large circles. Both directions. Keep the ribs down.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Bench ramp sets.</b> Empty bar → 40% → 60% → 80% of working weight.<span>8/5/3/3</span></summary>
+          <div class="wup-body">
+            <div class="wup-cue" style="flex:1">Ramp up to your first working set. Each set gets heavier but you do fewer reps — no failure, no close-to-failure. The last ramp set should feel crisp, not hard.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- MAIN 01: BARBELL BENCH PRESS -->
+  <section class="light ex" id="d1e1">
+    <div class="wrap">
+      <div class="ex-num">Movement 01</div>
+      <h3 class="title">Barbell Bench Press.</h3>
+      <div class="sub">Feet planted, back arched, bar to the lower chest. The king of upper-body size.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="28" y="176" width="138" height="6" rx="2" fill="currentColor"/>
+          <line class="equip" x1="34" y1="182" x2="34" y2="250"/>
+          <line class="equip" x1="160" y1="182" x2="160" y2="250"/>
+          <circle class="head" cx="42" cy="166" r="10"/>
+          <line x1="52" y1="172" x2="130" y2="174"/>
+          <line x1="130" y1="174" x2="152" y2="218"/>
+          <line x1="152" y1="218" x2="146" y2="250"/>
+          <line x1="52" y1="170" x2="52" y2="130">
+            <animate attributeName="x2" values="52;80;52" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="130;196;130" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="52" y1="130" x2="52" y2="90">
+            <animate attributeName="x1" values="52;80;52" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="130;196;130" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="52;80;52" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="90;158;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="22" y1="90" x2="82" y2="90">
+            <animate attributeName="x1" values="22;50;22" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="82;110;82" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="90;158;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="90;158;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="22" cy="90" r="8">
+            <animate attributeName="cx" values="22;50;22" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="90;158;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="82" cy="90" r="8">
+            <animate attributeName="cx" values="82;110;82" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="90;158;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×6-8</b><span>Sets × Reps</span></div>
+        <div><b>3:00</b><span>Rest</span></div>
+        <div><b>RPE 8</b><span>Effort</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Shoulder blades pinched and pressed into the pad. Small arch in the low back.</li>
+        <li><b>2.</b> Lower to the nipple line. Elbows ~75° from the torso, not flared to 90°.</li>
+        <li><b>3.</b> Drive feet through the floor as you press. Bar travels in a slight J-curve.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: flat DB bench press, 4×8 (safer to solo-fail). Lifetime: same lift, use a spotter on the last set.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 02: INCLINE DUMBBELL PRESS -->
+  <section class="dark ex" id="d1e2">
+    <div class="wrap">
+      <div class="ex-num">Movement 02</div>
+      <h3 class="title">Incline Dumbbell Press.</h3>
+      <div class="sub">Bench set to 30°. Dumbbells press up and slightly together. Hits the upper chest.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line class="equip" x1="30" y1="235" x2="75" y2="235"/>
+          <line class="equip" x1="75" y1="235" x2="130" y2="145"/>
+          <line class="equip" x1="30" y1="235" x2="30" y2="252"/>
+          <line class="equip" x1="130" y1="145" x2="130" y2="252"/>
+          <circle class="head" cx="138" cy="134" r="10"/>
+          <line x1="75" y1="225" x2="125" y2="147"/>
+          <line x1="75" y1="225" x2="55" y2="250"/>
+          <line x1="125" y1="147" x2="125" y2="107">
+            <animate attributeName="x2" values="125;98;125" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="107;178;107" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="125" y1="107" x2="125" y2="67">
+            <animate attributeName="x1" values="125;98;125" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="107;178;107" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="125;98;125" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="67;138;67" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <rect class="equip" x="117" y="60" width="16" height="14" rx="2" fill="currentColor">
+            <animate attributeName="x" values="117;90;117" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y" values="60;131;60" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×8-10</b><span>Sets × Reps</span></div>
+        <div><b>2:00</b><span>Rest</span></div>
+        <div><b>30°</b><span>Incline</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Set the bench to 30°. Shoulder blades pinned into the pad.</li>
+        <li><b>2.</b> Lower until the dumbbells graze the upper chest. Don't flare — ~45° from ribs.</li>
+        <li><b>3.</b> Press up and slightly together. Stop short of locking out to keep tension on the chest.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: same lift. Lifetime: landmine press for variation or incline Smith machine for safer failure.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 03: WEIGHTED DIPS -->
+  <section class="light ex" id="d1e3">
+    <div class="wrap">
+      <div class="ex-num">Movement 03</div>
+      <h3 class="title">Weighted Dips.</h3>
+      <div class="sub">Forward lean for chest. Upright for triceps. Either way — full range, no bouncing.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line class="equip" x1="110" y1="150" x2="110" y2="252"/>
+          <line class="equip" x1="98" y1="150" x2="122" y2="150"/>
+          <line x1="110" y1="150" x2="110" y2="110">
+            <animate attributeName="x2" values="110;145;110" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="110;138;110" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="110" y1="110" x2="110" y2="70">
+            <animate attributeName="x1" values="110;145;110" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="110;138;110" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="110;112;110" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="70;115;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="head" cx="104" cy="52" r="10">
+            <animate attributeName="cx" values="104;106;104" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="52;97;52" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line x1="110" y1="70" x2="122" y2="140">
+            <animate attributeName="x1" values="110;112;110" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="70;115;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="122;124;122" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="140;185;140" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="122" y1="140" x2="138" y2="180">
+            <animate attributeName="x1" values="122;124;122" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="140;185;140" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="138;140;138" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="180;225;180" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="138" y1="180" x2="155" y2="160">
+            <animate attributeName="x1" values="138;140;138" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="180;225;180" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="155;157;155" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="160;205;160" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×8-10</b><span>Sets × Reps</span></div>
+        <div><b>2:00</b><span>Rest</span></div>
+        <div><b>Full</b><span>Range</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Grip the bars, lock out, knees bent or crossed for balance.</li>
+        <li><b>2.</b> Lean forward for chest emphasis — upper arms parallel to the floor at the bottom.</li>
+        <li><b>3.</b> Press to a near-lockout. Don't slam out — stop just short.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> If under 8 clean bodyweight reps: assisted dip machine 3×10. Work Gym: bench dips (feet elevated) as a fallback.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 04: CABLE FLY — HIGH TO LOW -->
+  <section class="dark ex" id="d1e4">
+    <div class="wrap">
+      <div class="ex-num">Movement 04</div>
+      <h3 class="title">Cable Fly — High to Low.</h3>
+      <div class="sub">Pulleys high, arms sweep down and together. Squeeze hard for one full second in front.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="8" y="16" width="8" height="180" fill="currentColor"/>
+          <rect class="equip" x="184" y="16" width="8" height="180" fill="currentColor"/>
+          <circle class="equip" cx="12" cy="24" r="5" fill="none"/>
+          <circle class="equip" cx="188" cy="24" r="5" fill="none"/>
+          <line x1="78" y1="250" x2="98" y2="250"/>
+          <line x1="102" y1="250" x2="122" y2="250"/>
+          <circle class="head" cx="100" cy="44" r="10"/>
+          <line x1="100" y1="56" x2="100" y2="150"/>
+          <line x1="80" y1="64" x2="120" y2="64"/>
+          <line x1="100" y1="150" x2="90" y2="210"/>
+          <line x1="90" y1="210" x2="88" y2="250"/>
+          <line x1="100" y1="150" x2="110" y2="210"/>
+          <line x1="110" y1="210" x2="112" y2="250"/>
+          <line x1="80" y1="64" x2="52" y2="78">
+            <animate attributeName="x2" values="52;92;52" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="78;130;78" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="52" y1="78" x2="20" y2="100">
+            <animate attributeName="x1" values="52;92;52" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="78;130;78" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="20;95;20" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;162;100" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="120" y1="64" x2="148" y2="78">
+            <animate attributeName="x2" values="148;108;148" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="78;130;78" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="148" y1="78" x2="180" y2="100">
+            <animate attributeName="x1" values="148;108;148" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="78;130;78" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="180;105;180" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;162;100" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="equip" x1="12" y1="24" x2="20" y2="100" stroke-dasharray="3 3">
+            <animate attributeName="x2" values="20;95;20" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;162;100" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="equip" x1="188" y1="24" x2="180" y2="100" stroke-dasharray="3 3">
+            <animate attributeName="x2" values="180;105;180" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;162;100" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12-15</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>1s</b><span>Squeeze</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Pulleys at the top. Step forward to the mid-point between them.</li>
+        <li><b>2.</b> Slight elbow bend, locked throughout. Sweep down and across to meet below the chest.</li>
+        <li><b>3.</b> Squeeze one second in front. Control the stretch on the way back.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: DB fly on flat or incline bench. Lifetime: pec deck machine for a clean finisher.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 05: OVERHEAD TRICEP EXTENSION -->
+  <section class="light ex" id="d1e5">
+    <div class="wrap">
+      <div class="ex-num">Movement 05</div>
+      <h3 class="title">Overhead Tricep Extension.</h3>
+      <div class="sub">Upper arms pinned next to your ears. Only the forearms move. Full stretch at the bottom.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="257" x2="180" y2="257"/>
+          <line x1="85" y1="255" x2="115" y2="255"/>
+          <line x1="100" y1="255" x2="100" y2="215"/>
+          <line x1="100" y1="215" x2="100" y2="170"/>
+          <line x1="100" y1="170" x2="100" y2="80"/>
+          <circle class="head" cx="100" cy="62" r="10"/>
+          <line x1="100" y1="80" x2="100" y2="40"/>
+          <line x1="100" y1="40" x2="100" y2="4">
+            <animate attributeName="x2" values="100;72;100" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="4;74;4" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <rect class="equip" x="86" y="0" width="28" height="8" rx="2" fill="currentColor">
+            <animate attributeName="x" values="86;58;86" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y" values="0;70;0" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×10-12</b><span>Sets × Reps</span></div>
+        <div><b>90s</b><span>Rest</span></div>
+        <div><b>Deep</b><span>Stretch</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Stand or seat against a back pad. Elbows tight to the head.</li>
+        <li><b>2.</b> Lower slow behind the head. Feel a deep stretch in the long head.</li>
+        <li><b>3.</b> Drive the weight up until the elbows lock. Don't flare.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: single DB overhead (both hands under the bell). Lifetime: rope overhead cable extension — constant tension.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 06: ROPE PUSHDOWN -->
+  <section class="dark ex" id="d1e6">
+    <div class="wrap">
+      <div class="ex-num">Movement 06</div>
+      <h3 class="title">Rope Pushdown.</h3>
+      <div class="sub">Elbows glued to your ribs. Press the rope down and spread at the bottom.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="26" y="20" width="8" height="190" fill="currentColor"/>
+          <circle class="equip" cx="30" cy="28" r="6" fill="none"/>
+          <line x1="95" y1="250" x2="125" y2="250"/>
+          <line x1="110" y1="250" x2="110" y2="200"/>
+          <line x1="110" y1="200" x2="110" y2="150"/>
+          <line x1="110" y1="150" x2="110" y2="70"/>
+          <circle class="head" cx="110" cy="56" r="10"/>
+          <line x1="110" y1="70" x2="110" y2="110"/>
+          <line x1="110" y1="110" x2="88" y2="80">
+            <animate attributeName="x2" values="88;110;88" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="80;150;80" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="equip" x1="30" y1="28" x2="88" y2="80" stroke-dasharray="3 3">
+            <animate attributeName="x2" values="88;110;88" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="80;150;80" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="dot" cx="88" cy="80" r="4">
+            <animate attributeName="cx" values="88;110;88" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="80;150;80" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12-15</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>Spread</b><span>At Bottom</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Stand tall, slight forward lean. Elbows glued to the ribcage.</li>
+        <li><b>2.</b> Only the forearm moves. If the elbow drifts, drop the weight.</li>
+        <li><b>3.</b> At the bottom, spread the rope apart and hold one second.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: single-arm band pushdown if no cable. Lifetime: V-bar or straight bar for variety each week.</div>
+    </div>
+  </section>
+
+  <!-- D1 INSERT POINT -->
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Cool-down · 4 min</h4>
+      <h3>Open what you just closed.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Easy walk.</b> Drop the heart rate.<span>2 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="68"/>
+              <line x1="92" y1="42" x2="112" y2="42"/>
+              <line x1="100" y1="68" x2="92" y2="98"><animate attributeName="x2" values="86;100;114;100;86" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="100" y1="68" x2="108" y2="98"><animate attributeName="x2" values="114;100;86;100;114" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="92" y1="42" x2="80" y2="62"><animate attributeName="x2" values="74;88;94;88;74" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="112" y1="42" x2="124" y2="62"><animate attributeName="x2" values="130;112;106;112;130" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+            </svg></div>
+            <div class="wup-cue">Walk it off. Get the heart rate down before stretching. Cooler muscles stretch better than warmer ones.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Doorway chest stretch.</b> Arm on the frame, rotate away.<span>45s each side</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="equip" x1="50" y1="6" x2="50" y2="105"/>
+              <circle class="head" cx="92" cy="32" r="7"><animate attributeName="cy" values="32;33;32" dur="3s" repeatCount="indefinite"/></circle>
+              <line x1="92" y1="39" x2="98" y2="78"/>
+              <line x1="92" y1="48" x2="50" y2="34"/>
+              <line x1="92" y1="48" x2="118" y2="60"/>
+              <line x1="98" y1="78" x2="92" y2="105"/>
+              <line x1="98" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Forearm on the door frame, elbow at shoulder height. Step forward through the doorway. Feel a stretch across the chest and front delt.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Triceps overhead stretch.</b> Reach down the back, pull the elbow.<span>30s each arm</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="78"/>
+              <line x1="88" y1="38" x2="112" y2="38"/>
+              <line x1="88" y1="38" x2="78" y2="20"/>
+              <line x1="78" y1="20" x2="92" y2="44"/>
+              <line x1="112" y1="38" x2="120" y2="20"/>
+              <line x1="120" y1="20" x2="84" y2="22"><animate attributeName="x2" values="84;78;84" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">One arm bent overhead, hand reaches down between the shoulder blades. The other hand pulls that elbow gently toward the centerline.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Shoulder cross-body stretch.</b> Arm across chest, pull with the other.<span>30s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="78"/>
+              <line x1="88" y1="38" x2="112" y2="38"/>
+              <line x1="88" y1="38" x2="140" y2="48"><animate attributeName="x2" values="138;142;138" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="112" y1="38" x2="135" y2="58"><animate attributeName="x2" values="135;138;135" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Pull one arm horizontally across the chest. Use the opposite hand on the elbow to gently increase the stretch. Shoulder blades down.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- DAY 2 PULL -->
+<div class="day active" data-day="2">
+  <section class="dark day-head" id="top2">
+    <h1 class="display">Pull.</h1>
+    <div class="sub">Back and biceps. Lats, mid-back, rear delts, and arms — in that order.</div>
+  </section>
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Warm-up · 6 min</h4>
+      <h3>Prime the chain.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Rowing machine.</b> Easy pace.<span>3 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="equip" cx="180" cy="84" r="10" fill="none"/>
+              <line class="equip" x1="168" y1="86" x2="168" y2="68"/>
+              <rect class="equip" x="70" y="96" width="22" height="5" rx="1" fill="currentColor"><animate attributeName="x" values="75;50;75" dur="2.2s" repeatCount="indefinite"/></rect>
+              <circle class="head" cx="88" cy="38" r="7"><animate attributeName="cx" values="88;62;88" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line x1="88" y1="45" x2="82" y2="90"><animate attributeName="x1" values="88;62;88" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="85" y1="52" x2="150" y2="78"><animate attributeName="x1" values="85;58;85" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <circle class="dot" cx="155" cy="82" r="3"><animate attributeName="cx" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line class="equip" x1="180" y1="84" x2="155" y2="82" stroke-dasharray="2 2"><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="82" y1="90" x2="160" y2="96"><animate attributeName="x1" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Long, smooth strokes. Legs drive first, then the hips, then the arms. Inhale on the recovery.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Band pull-aparts.</b> Chest high, pinch shoulder blades.<span>2 × 15</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="8"/>
+              <line x1="100" y1="30" x2="100" y2="82"/>
+              <line x1="88" y1="40" x2="112" y2="40"/>
+              <line x1="100" y1="82" x2="90" y2="105"/>
+              <line x1="100" y1="82" x2="110" y2="105"/>
+              <line x1="88" y1="40" x2="60" y2="50"><animate attributeName="x2" values="70;30;70" dur="1.6s" repeatCount="indefinite"/><animate attributeName="y2" values="52;48;52" dur="1.6s" repeatCount="indefinite"/></line>
+              <line x1="112" y1="40" x2="140" y2="50"><animate attributeName="x2" values="130;170;130" dur="1.6s" repeatCount="indefinite"/><animate attributeName="y2" values="52;48;52" dur="1.6s" repeatCount="indefinite"/></line>
+              <path d="M 70 52 Q 100 60 130 52" stroke-dasharray="3 3" class="equip"><animate attributeName="d" values="M 70 52 Q 100 60 130 52; M 30 48 Q 100 75 170 48; M 70 52 Q 100 60 130 52" dur="1.6s" repeatCount="indefinite"/></path>
+            </svg></div>
+            <div class="wup-cue">Arms straight, no shrug. Pull the band apart until it touches the chest. Slow return.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Scapular pull-ups.</b> Hang from the bar; shrug down and back.<span>2 × 5</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 140">
+              <line class="equip" x1="30" y1="12" x2="170" y2="12"/>
+              <line class="equip" x1="34" y1="12" x2="34" y2="4"/>
+              <line class="equip" x1="166" y1="12" x2="166" y2="4"/>
+              <line x1="100" y1="12" x2="100" y2="52"><animate attributeName="y2" values="52;42;52" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="52" x2="100" y2="80"><animate attributeName="y1" values="52;42;52" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y2" values="80;70;80" dur="2.2s" repeatCount="indefinite"/></line>
+              <circle class="head" cx="106" cy="72" r="6"><animate attributeName="cy" values="72;62;72" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line x1="100" y1="80" x2="100" y2="125"><animate attributeName="y1" values="80;70;80" dur="2.2s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Arms stay straight. Only the shoulder blades move — pack them down and back. You should rise an inch or two, no more.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Cat–camel.</b> Slow. Thoracic mobility.<span>2 × 8</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <path d="M 55 60 Q 100 55 140 60"><animate attributeName="d" values="M 55 60 Q 100 45 140 60; M 55 60 Q 100 78 140 60; M 55 60 Q 100 45 140 60" dur="3.2s" repeatCount="indefinite"/></path>
+              <circle class="head" cx="44" cy="60" r="8"><animate attributeName="cy" values="60;68;60" dur="3.2s" repeatCount="indefinite"/></circle>
+              <line x1="55" y1="60" x2="55" y2="98"/>
+              <line x1="140" y1="60" x2="140" y2="98"/>
+              <line x1="70" y1="60" x2="70" y2="98"/>
+              <line x1="125" y1="60" x2="125" y2="98"/>
+            </svg></div>
+            <div class="wup-cue">On hands and knees. Round the spine toward the ceiling (cat), then arch and look up (camel). Move with your breath.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Dead-hangs.</b> Hang from the pull-up bar, shoulders packed down.<span>2 × 20s</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 140">
+              <line class="equip" x1="30" y1="12" x2="170" y2="12"/>
+              <line class="equip" x1="34" y1="12" x2="34" y2="4"/>
+              <line class="equip" x1="166" y1="12" x2="166" y2="4"/>
+              <line x1="100" y1="12" x2="100" y2="52"/>
+              <line x1="100" y1="52" x2="100" y2="82"/>
+              <circle class="head" cx="106" cy="74" r="6"/>
+              <line x1="100" y1="82" x2="100" y2="128"><animate attributeName="x2" values="100;98;100;102;100" dur="3.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/></line>
+            </svg></div>
+            <div class="wup-cue">Grip the bar, hang dead — arms straight. Then pack the shoulders away from the ears. Stretches the lats and decompresses the spine.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- MAIN 01: PULL-UP -->
+  <section class="light ex" id="d2e1">
+    <div class="wrap">
+      <div class="ex-num">Movement 01</div>
+      <h3 class="title">Weighted Pull-Up.</h3>
+      <div class="sub">Full hang at the bottom, chin clears the bar at the top. Control the descent.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="equip" x1="20" y1="32" x2="180" y2="32"/>
+          <line class="equip" x1="24" y1="32" x2="24" y2="14"/>
+          <line class="equip" x1="176" y1="32" x2="176" y2="14"/>
+          <line x1="100" y1="32" x2="100" y2="72">
+            <animate attributeName="x2" values="100;138;100" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="72;45;72" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="72" x2="100" y2="112">
+            <animate attributeName="x1" values="100;138;100" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="72;45;72" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="112;58;112" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="112" x2="100" y2="200">
+            <animate attributeName="y1" values="112;58;112" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="200;146;200" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="head" cx="108" cy="102" r="10">
+            <animate attributeName="cy" values="102;48;102" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line x1="100" y1="200" x2="108" y2="245">
+            <animate attributeName="y1" values="200;146;200" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="245;191;245" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="108" y1="245" x2="105" y2="272">
+            <animate attributeName="y1" values="245;191;245" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="272;218;272" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×6-8</b><span>Sets × Reps</span></div>
+        <div><b>2:00</b><span>Rest</span></div>
+        <div><b>3s</b><span>Eccentric</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Shoulder-width grip, palms forward. Thumbs around the bar.</li>
+        <li><b>2.</b> Drive elbows down and back. Think "chest to bar," not "chin to bar."</li>
+        <li><b>3.</b> Lower under control — three full seconds to dead hang.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> If under 6 clean reps: lat pulldown 3×8-10 with the same effort level. Add weight (belt or held DB) only when you hit 8 clean reps unweighted.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 02: BARBELL ROW -->
+  <section class="dark ex" id="d2e2">
+    <div class="wrap">
+      <div class="ex-num">Movement 02</div>
+      <h3 class="title">Barbell Row.</h3>
+      <div class="sub">Stay bent over. Drive the elbows up and back. Squeeze the shoulder blades together.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="108" y2="202"/>
+          <line x1="108" y1="202" x2="80" y2="180"/>
+          <line x1="80" y1="180" x2="150" y2="145"/>
+          <circle class="head" cx="160" cy="132" r="10"/>
+          <line x1="150" y1="145" x2="150" y2="185">
+            <animate attributeName="x2" values="150;130;150" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="185;110;185" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="150" y1="185" x2="150" y2="225">
+            <animate attributeName="x1" values="150;130;150" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="185;110;185" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="150;118;150" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="225;149;225" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="130" y1="228" x2="170" y2="228">
+            <animate attributeName="x1" values="130;98;130" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="170;138;170" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="228;152;228" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="228;152;228" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="130" cy="228" r="8">
+            <animate attributeName="cx" values="130;98;130" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="228;152;228" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="170" cy="228" r="8">
+            <animate attributeName="cx" values="170;138;170" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="228;152;228" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×8</b><span>Sets × Reps</span></div>
+        <div><b>2:00</b><span>Rest</span></div>
+        <div><b>1s</b><span>Squeeze</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Hinge to ~45°. Flat back, chest proud, core braced.</li>
+        <li><b>2.</b> Pull to the lower ribs, not the chest. Elbows track past the body.</li>
+        <li><b>3.</b> One-second squeeze at the top. Control all the way down.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: chest-supported DB row (kills the cheating). Lifetime: T-bar row or Meadows row.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 03: SEATED CABLE ROW -->
+  <section class="light ex" id="d2e3">
+    <div class="wrap">
+      <div class="ex-num">Movement 03</div>
+      <h3 class="title">Seated Cable Row.</h3>
+      <div class="sub">Long pull, full stretch at the front. Pull the elbows past your sides.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="36" y="208" width="10" height="40" rx="2" fill="currentColor"/>
+          <line class="equip" x1="60" y1="206" x2="150" y2="206"/>
+          <line class="equip" x1="70" y1="206" x2="70" y2="248"/>
+          <line class="equip" x1="140" y1="206" x2="140" y2="248"/>
+          <circle class="equip" cx="22" cy="200" r="8" fill="none"/>
+          <line x1="125" y1="200" x2="70" y2="200"/>
+          <line x1="70" y1="200" x2="46" y2="222"/>
+          <line x1="125" y1="200" x2="125" y2="130"/>
+          <circle class="head" cx="125" cy="116" r="10"/>
+          <line x1="125" y1="130" x2="85" y2="148">
+            <animate attributeName="x2" values="85;150;85" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="148;132;148" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="85" y1="148" x2="50" y2="170">
+            <animate attributeName="x1" values="85;150;85" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="148;132;148" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="50;120;50" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="170;170;170" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="equip" x1="22" y1="200" x2="50" y2="170" stroke-dasharray="3 3">
+            <animate attributeName="x2" values="50;120;50" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="170;170;170" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="dot" cx="50" cy="170" r="4">
+            <animate attributeName="cx" values="50;120;50" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="170;170;170" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×10-12</b><span>Sets × Reps</span></div>
+        <div><b>1:30</b><span>Rest</span></div>
+        <div><b>2s</b><span>Stretch</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Chest tall. Feet pressed into the plate. No rounded lower back.</li>
+        <li><b>2.</b> Let the shoulder blades protract at the front — feel the full stretch.</li>
+        <li><b>3.</b> Pull the handle to the lower belly. Elbows brush past your sides.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: one-arm DB row or seated machine row. Lifetime: V-handle or wide-grip variation — rotate each week.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 04: FACE PULL -->
+  <section class="dark ex" id="d2e4">
+    <div class="wrap">
+      <div class="ex-num">Movement 04</div>
+      <h3 class="title">Face Pull.</h3>
+      <div class="sub">Elbows flare wide and high. Rope splits at the face. Shoulder health in a single exercise.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line class="equip" x1="95" y1="14" x2="105" y2="14"/>
+          <circle class="head" cx="100" cy="48" r="10"/>
+          <line x1="100" y1="58" x2="100" y2="160"/>
+          <line x1="85" y1="68" x2="115" y2="68"/>
+          <line x1="100" y1="160" x2="90" y2="205"/>
+          <line x1="90" y1="205" x2="88" y2="250"/>
+          <line x1="100" y1="160" x2="110" y2="205"/>
+          <line x1="110" y1="205" x2="112" y2="250"/>
+          <line x1="78" y1="250" x2="98" y2="250"/>
+          <line x1="102" y1="250" x2="122" y2="250"/>
+          <line x1="85" y1="68" x2="78" y2="58">
+            <animate attributeName="x2" values="78;50;78" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="58;66;58" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="78" y1="58" x2="85" y2="40">
+            <animate attributeName="x1" values="78;50;78" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="58;66;58" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="85;66;85" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="40;52;40" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="115" y1="68" x2="122" y2="58">
+            <animate attributeName="x2" values="122;150;122" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="58;66;58" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="122" y1="58" x2="115" y2="40">
+            <animate attributeName="x1" values="122;150;122" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="58;66;58" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="115;134;115" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="40;52;40" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="equip" x1="100" y1="14" x2="85" y2="40" stroke-dasharray="3 3">
+            <animate attributeName="x2" values="85;66;85" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="40;52;40" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="equip" x1="100" y1="14" x2="115" y2="40" stroke-dasharray="3 3">
+            <animate attributeName="x2" values="115;134;115" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="40;52;40" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×15</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>Light</b><span>Load</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Rope at eye level. Palms face each other, thumbs back.</li>
+        <li><b>2.</b> Pull the rope apart as you pull toward your face. Elbows high and wide.</li>
+        <li><b>3.</b> Pause one second with hands beside your ears. Shoulder blades pinned.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: band face pulls (anchor to the squat rack). Lifetime: reverse pec-deck as an alternative.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 05: BARBELL CURL -->
+  <section class="light ex" id="d2e5">
+    <div class="wrap">
+      <div class="ex-num">Movement 05</div>
+      <h3 class="title">Barbell Curl.</h3>
+      <div class="sub">Elbows pinned to your sides. The forearms do everything. No swing.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="100" y2="200"/>
+          <line x1="100" y1="200" x2="100" y2="150"/>
+          <line x1="100" y1="150" x2="100" y2="70"/>
+          <circle class="head" cx="100" cy="56" r="10"/>
+          <line x1="100" y1="70" x2="100" y2="110"/>
+          <line x1="100" y1="110" x2="100" y2="150">
+            <animate attributeName="x2" values="100;92;100" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;78;150" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="78" y1="152" x2="122" y2="152">
+            <animate attributeName="x1" values="78;70;78" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="122;114;122" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="78" cy="152" r="7">
+            <animate attributeName="cx" values="78;70;78" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="122" cy="152" r="7">
+            <animate attributeName="cx" values="122;114;122" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×8</b><span>Sets × Reps</span></div>
+        <div><b>1:30</b><span>Rest</span></div>
+        <div><b>2s</b><span>Down</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Stand tall. Core braced. Elbows glued to the ribcage.</li>
+        <li><b>2.</b> Curl without moving the elbow. If it drifts forward, lighten the load.</li>
+        <li><b>3.</b> Two seconds down. Straighten the arm fully at the bottom.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> EZ-bar curl works the same (kinder on wrists). Avoid standing DB curls as the anchor here — elbows cheat too easily.</div>
+    </div>
+  </section>
+
+  <!-- EXERCISE INSERT POINT -->
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Cool-down · 5 min</h4>
+      <h3>Flush and stretch.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Easy walk or rower.</b> Drop the heart rate.<span>2 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="68"/>
+              <line x1="92" y1="42" x2="112" y2="42"/>
+              <line x1="100" y1="68" x2="92" y2="98"><animate attributeName="x2" values="86;100;114;100;86" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="100" y1="68" x2="108" y2="98"><animate attributeName="x2" values="114;100;86;100;114" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="92" y1="42" x2="80" y2="62"><animate attributeName="x2" values="74;88;94;88;74" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="112" y1="42" x2="124" y2="62"><animate attributeName="x2" values="130;112;106;112;130" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+            </svg></div>
+            <div class="wup-cue">Walk or row easy. Get the heart rate down before stretching.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Lat stretch.</b> Grab a rack, hinge, sit back.<span>45s each side</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="equip" x1="170" y1="6" x2="170" y2="105"/>
+              <circle class="head" cx="78" cy="58" r="7"/>
+              <line x1="84" y1="62" x2="120" y2="80"/>
+              <line x1="86" y1="55" x2="170" y2="22"><animate attributeName="x1" values="86;90;86" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="120" y1="80" x2="115" y2="105"/>
+              <line x1="120" y1="80" x2="135" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Grip the rack with one hand. Hinge at the hips and sit your butt back away from the bar. Feel the lat stretch from armpit down the side.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Biceps stretch.</b> Arm against a wall, rotate away.<span>30s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="equip" x1="50" y1="6" x2="50" y2="105"/>
+              <circle class="head" cx="100" cy="32" r="7"><animate attributeName="cx" values="100;104;100" dur="3s" repeatCount="indefinite"/></circle>
+              <line x1="100" y1="39" x2="100" y2="78"><animate attributeName="x1" values="100;104;100" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="92" y1="48" x2="50" y2="42"/>
+              <line x1="108" y1="48" x2="120" y2="68"/>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Palm flat on a wall, fingers pointing back. Slowly rotate your body away from the wall to lengthen the bicep.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Child's pose.</b> Breathe into the lower back.<span>60s</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="58" cy="86" r="7"><animate attributeName="cy" values="86;88;86" dur="3.5s" repeatCount="indefinite"/></circle>
+              <line x1="65" y1="86" x2="120" y2="78"><animate attributeName="y1" values="86;88;86" dur="3.5s" repeatCount="indefinite"/></line>
+              <line x1="65" y1="84" x2="35" y2="92"/>
+              <line x1="120" y1="78" x2="160" y2="98"/>
+              <line x1="120" y1="78" x2="155" y2="98"/>
+            </svg></div>
+            <div class="wup-cue">Knees wide, big toes touching. Sit back onto the heels and reach the arms long in front. Breathe into the lower back.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- DAY 3 LEGS -->
+<div class="day" data-day="3">
+  <section class="dark day-head">
+    <h1 class="display">Legs.</h1>
+    <div class="sub">Squat, hinge, and everything they drive. Quads, hamstrings, glutes, calves, core.</div>
+  </section>
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Warm-up · 8 min</h4>
+      <h3>Open the hips. Wake the quads.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Bike or rower.</b> Moderate pace, build a light sweat.<span>4 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="equip" cx="60" cy="80" r="18" fill="none"/>
+              <circle class="equip" cx="140" cy="80" r="18" fill="none"/>
+              <line class="equip" x1="60" y1="80" x2="140" y2="80"/>
+              <line class="equip" x1="100" y1="80" x2="100" y2="35"/>
+              <circle class="head" cx="110" cy="28" r="7"/>
+              <line x1="110" y1="35" x2="115" y2="62"/>
+              <line x1="115" y1="62" x2="90" y2="80"><animateTransform attributeName="transform" type="rotate" values="0 100 80;360 100 80" dur="2s" repeatCount="indefinite"/></line>
+              <circle class="dot" cx="90" cy="80" r="3"><animateTransform attributeName="transform" type="rotate" values="0 100 80;360 100 80" dur="2s" repeatCount="indefinite"/></circle>
+              <line x1="115" y1="62" x2="115" y2="44"/>
+            </svg></div>
+            <div class="wup-cue">Moderate pace. You should be able to hold a conversation but not comfortably.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Bodyweight squats.</b> Deep, slow, full range.<span>2 × 10</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 140">
+              <line class="ref" x1="10" y1="130" x2="190" y2="130"/>
+              <line x1="85" y1="128" x2="115" y2="128"/>
+              <line x1="100" y1="128" x2="100" y2="100"><animate attributeName="x2" values="100;118;100" dur="2.4s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="100" x2="100" y2="70"><animate attributeName="x1" values="100;118;100" dur="2.4s" repeatCount="indefinite"/><animate attributeName="x2" values="100;90;100" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y2" values="70;98;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="70" x2="100" y2="24"><animate attributeName="x1" values="100;90;100" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y1" values="70;98;70" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y2" values="24;56;24" dur="2.4s" repeatCount="indefinite"/></line>
+              <circle class="head" cx="100" cy="16" r="7"><animate attributeName="cy" values="16;48;16" dur="2.4s" repeatCount="indefinite"/></circle>
+            </svg></div>
+            <div class="wup-cue">Deep — hips below parallel. Chest tall. Think two seconds down, drive up.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Leg swings.</b> Front-back then side-to-side.<span>10 each / leg</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 140">
+              <line class="ref" x1="10" y1="130" x2="190" y2="130"/>
+              <circle class="head" cx="100" cy="16" r="7"/>
+              <line x1="100" y1="24" x2="100" y2="76"/>
+              <line x1="100" y1="76" x2="95" y2="128"/>
+              <line x1="95" y1="128" x2="85" y2="128"/>
+              <line x1="100" y1="76" x2="140" y2="110"><animate attributeName="x2" values="140;60;140" dur="1.8s" repeatCount="indefinite"/><animate attributeName="y2" values="110;110;110" dur="1.8s" repeatCount="indefinite"/></line>
+              <line x1="140" y1="110" x2="150" y2="128"><animate attributeName="x1" values="140;60;140" dur="1.8s" repeatCount="indefinite"/><animate attributeName="y1" values="110;110;110" dur="1.8s" repeatCount="indefinite"/><animate attributeName="x2" values="150;50;150" dur="1.8s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Hold a rack or wall. Swing the working leg fully forward and back — no twisting the hips. Then repeat side-to-side.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>90/90 hip rock.</b> Front leg 90°, back leg 90°, sit tall, switch.<span>30s each side</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 140">
+              <line class="ref" x1="10" y1="130" x2="190" y2="130"/>
+              <circle class="head" cx="100" cy="40" r="8"/>
+              <line x1="100" y1="48" x2="100" y2="92"/>
+              <line x1="100" y1="92" x2="60" y2="92"><animate attributeName="x2" values="60;140;60" dur="3.5s" repeatCount="indefinite"/></line>
+              <line x1="60" y1="92" x2="60" y2="128"><animate attributeName="x1" values="60;140;60" dur="3.5s" repeatCount="indefinite"/><animate attributeName="x2" values="60;140;60" dur="3.5s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="92" x2="140" y2="92"><animate attributeName="x2" values="140;60;140" dur="3.5s" repeatCount="indefinite"/></line>
+              <line x1="140" y1="92" x2="170" y2="112"><animate attributeName="x1" values="140;60;140" dur="3.5s" repeatCount="indefinite"/><animate attributeName="x2" values="170;30;170" dur="3.5s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Sit on the floor. Front leg bent 90° in front, back leg bent 90° beside. Rock from side to side with a tall spine.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Squat ramp sets.</b> Empty bar → 40% → 60% → 80% of working weight.<span>8/5/3/3</span></summary>
+          <div class="wup-body">
+            <div class="wup-cue" style="flex:1">Ramp into your first working set. Each set gets heavier and has fewer reps. Last ramp set should move crisp, not hard — save the grinding for working sets.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- MAIN 01: BACK SQUAT -->
+  <section class="dark ex" id="d3e1">
+    <div class="wrap">
+      <div class="ex-num">Movement 01</div>
+      <h3 class="title">Back Squat.</h3>
+      <div class="sub">Hips go back and down together. Knees track over toes. Chest stays proud all the way down.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="100" y2="200">
+            <animate attributeName="x2" values="100;120;100" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="200" x2="100" y2="150">
+            <animate attributeName="x1" values="100;120;100" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="100;90;100" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;195;150" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="150" x2="100" y2="70">
+            <animate attributeName="x1" values="100;90;100" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="150;195;150" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="70;120;70" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="head" cx="100" cy="56" r="10">
+            <animate attributeName="cy" values="56;106;56" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line class="bar" x1="72" y1="73" x2="128" y2="73">
+            <animate attributeName="y1" values="73;123;73" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="73;123;73" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="72" cy="73" r="9">
+            <animate attributeName="cy" values="73;123;73" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="128" cy="73" r="9">
+            <animate attributeName="cy" values="73;123;73" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×6-8</b><span>Sets × Reps</span></div>
+        <div><b>3:00</b><span>Rest</span></div>
+        <div><b>RPE 8</b><span>Effort</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Bar on the traps (high-bar) or rear delts (low-bar). Wrists stacked.</li>
+        <li><b>2.</b> Brace hard. Break at hips and knees together. Knees out.</li>
+        <li><b>3.</b> Hips at or below knee crease at the bottom. Drive the floor away to stand.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: goblet squat with heaviest DB, 4×10. Lifetime: Smith squat or hack squat machine for bad-back days.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 02: DEADLIFT -->
+  <section class="light ex" id="d3e2">
+    <div class="wrap">
+      <div class="ex-num">Movement 02</div>
+      <h3 class="title">Conventional Deadlift.</h3>
+      <div class="sub">Hinge at the hips. Drive the floor away. The single biggest strength-to-size return in the gym.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="100" y1="250" x2="108" y2="202">
+            <animate attributeName="x2" values="108;100;108" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="202;200;202" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="108" y1="202" x2="70" y2="182">
+            <animate attributeName="x1" values="108;100;108" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="202;200;202" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="70;100;70" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="182;150;182" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="70" y1="182" x2="100" y2="132">
+            <animate attributeName="x1" values="70;100;70" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="182;150;182" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="132;68;132" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="head" cx="108" cy="118" r="10">
+            <animate attributeName="cx" values="108;100;108" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="118;54;118" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line x1="100" y1="132" x2="100" y2="243">
+            <animate attributeName="y1" values="132;68;132" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="243;153;243" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="72" y1="243" x2="128" y2="243">
+            <animate attributeName="y1" values="243;153;243" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="243;153;243" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="72" cy="243" r="9">
+            <animate attributeName="cy" values="243;153;243" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="128" cy="243" r="9">
+            <animate attributeName="cy" values="243;153;243" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×5</b><span>Sets × Reps</span></div>
+        <div><b>3:00</b><span>Rest</span></div>
+        <div><b>RPE 8</b><span>Effort</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Bar over mid-foot. Shins close. Neutral spine, chest up.</li>
+        <li><b>2.</b> Hips go back before knees. Push the floor away.</li>
+        <li><b>3.</b> Lockout: hips and knees finish together. No overextension.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: trap-bar deadlift (back-friendly) or dumbbell RDL. Lifetime: straps OK after the first heavy set.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 03: STANDING CALF RAISE -->
+  <section class="dark ex" id="d3e3">
+    <div class="wrap">
+      <div class="ex-num">Movement 03</div>
+      <h3 class="title">Standing Calf Raise.</h3>
+      <div class="sub">Toes on a plate. Full stretch at the bottom, full contraction at the top.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="95" y="244" width="30" height="8" rx="1" fill="currentColor"/>
+          <line x1="85" y1="250" x2="115" y2="250">
+            <animate attributeName="y1" values="250;234;250" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="250" x2="100" y2="200">
+            <animate attributeName="y2" values="200;184;200" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="200" x2="100" y2="150">
+            <animate attributeName="y1" values="200;184;200" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;134;150" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="150" x2="100" y2="70">
+            <animate attributeName="y1" values="150;134;150" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="70;54;70" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="head" cx="100" cy="56" r="10">
+            <animate attributeName="cy" values="56;40;56" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line x1="100" y1="70" x2="90" y2="150">
+            <animate attributeName="y1" values="70;54;70" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;134;150" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="70" x2="110" y2="150">
+            <animate attributeName="y1" values="70;54;70" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;134;150" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="dot" cx="90" cy="150" r="5">
+            <animate attributeName="cy" values="150;134;150" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="dot" cx="110" cy="150" r="5">
+            <animate attributeName="cy" values="150;134;150" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×12-15</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>2s</b><span>Stretch</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Balls of feet on the plate. Heels hang free with room to drop.</li>
+        <li><b>2.</b> Drive the balls of the feet into the plate — not the toes.</li>
+        <li><b>3.</b> Pause one second up and two seconds down. Don't bounce.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: DB calf raise (one DB, opposite hand). Lifetime: standing calf raise machine or smith machine.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 04: HANGING LEG RAISE -->
+  <section class="light ex" id="d3e4">
+    <div class="wrap">
+      <div class="ex-num">Movement 04</div>
+      <h3 class="title">Hanging Leg Raise.</h3>
+      <div class="sub">Straight legs, if you can. No swing. Curl the pelvis under at the top.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="equip" x1="20" y1="32" x2="180" y2="32"/>
+          <line class="equip" x1="24" y1="32" x2="24" y2="14"/>
+          <line class="equip" x1="176" y1="32" x2="176" y2="14"/>
+          <line x1="100" y1="32" x2="100" y2="72"/>
+          <line x1="100" y1="72" x2="100" y2="112"/>
+          <line x1="100" y1="112" x2="100" y2="170"/>
+          <circle class="head" cx="108" cy="102" r="10"/>
+          <line x1="100" y1="170" x2="100" y2="210">
+            <animate attributeName="x2" values="100;140;100" dur="2.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="210;170;210" dur="2.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="100" y1="210" x2="100" y2="250">
+            <animate attributeName="x1" values="100;140;100" dur="2.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="210;170;210" dur="2.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="100;180;100" dur="2.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="250;170;250" dur="2.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×10-12</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>No swing</b><span>Strict</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Shoulder blades packed down. Dead hang, no swing.</li>
+        <li><b>2.</b> Raise legs with a controlled, slow pelvic curl — belly does the work.</li>
+        <li><b>3.</b> Above horizontal if you can. Lower slowly — no dropping.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: captain's-chair leg raise (no hang needed). Lifetime: same — or weighted decline sit-up as an alternative.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 05: BULGARIAN SPLIT SQUAT -->
+  <section class="dark ex" id="d3e5">
+    <div class="wrap">
+      <div class="ex-num">Movement 05</div>
+      <h3 class="title">Bulgarian Split Squat.</h3>
+      <div class="sub">Rear foot up. Front leg does everything. Brutal on quads and glutes with moderate load.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="140" y="216" width="48" height="8" rx="1" fill="currentColor"/>
+          <line x1="75" y1="250" x2="95" y2="250"/>
+          <line x1="85" y1="250" x2="85" y2="200"/>
+          <line x1="85" y1="200" x2="92" y2="150">
+            <animate attributeName="x2" values="92;96;92" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;205;150" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="92" y1="150" x2="92" y2="70">
+            <animate attributeName="x1" values="92;96;92" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="150;205;150" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="92;98;92" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="70;130;70" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="head" cx="92" cy="56" r="10">
+            <animate attributeName="cx" values="92;98;92" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="56;116;56" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <line x1="92" y1="150" x2="130" y2="195">
+            <animate attributeName="x1" values="92;96;92" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="150;205;150" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="130;118;130" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="195;238;195" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="130" y1="195" x2="160" y2="216">
+            <animate attributeName="x1" values="130;118;130" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="195;238;195" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <rect class="equip" x="84" y="140" width="16" height="18" rx="2" fill="currentColor">
+            <animate attributeName="x" values="84;88;84" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y" values="140;196;140" dur="2.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×10 / leg</b><span>Sets × Reps</span></div>
+        <div><b>2:00</b><span>Rest</span></div>
+        <div><b>Unilateral</b><span>Pattern</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Rear foot on the bench (laces or toes). Front foot far enough forward that the shin stays near vertical.</li>
+        <li><b>2.</b> Drop straight down — the knee stays over the foot. Chest tall.</li>
+        <li><b>3.</b> Drive through the front heel to stand. Finish all reps on one side, then switch.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: DBs in each hand — same reps. Lifetime: Smith-machine split squat if balance is an issue.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 06: LYING LEG CURL -->
+  <section class="light ex" id="d3e6">
+    <div class="wrap">
+      <div class="ex-num">Movement 06</div>
+      <h3 class="title">Lying Leg Curl.</h3>
+      <div class="sub">Hips pressed into the pad. Heels to glutes. Slow on the way down.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="20" y="178" width="130" height="8" rx="2" fill="currentColor"/>
+          <line class="equip" x1="28" y1="186" x2="28" y2="250"/>
+          <line class="equip" x1="142" y1="186" x2="142" y2="250"/>
+          <circle class="head" cx="30" cy="164" r="10"/>
+          <line x1="40" y1="174" x2="95" y2="174"/>
+          <line x1="95" y1="174" x2="150" y2="174"/>
+          <line x1="150" y1="174" x2="150" y2="218">
+            <animate attributeName="x2" values="150;110;150" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="218;162;218" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="equip" cx="150" cy="220" r="8" fill="none" stroke-width="3">
+            <animate attributeName="cx" values="150;110;150" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="220;164;220" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>3s</b><span>Down</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Knees just past the edge of the pad. Pelvis pressed flat.</li>
+        <li><b>2.</b> Point the toes, curl the heels to the glutes. Don't lift the hips off the pad.</li>
+        <li><b>3.</b> Three seconds on the lower. Squeeze the hamstrings at the top.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: single-leg DB Romanian deadlift, 3×10/leg (hamstring dominant). Lifetime: seated leg curl as an alternative.</div>
+    </div>
+  </section>
+
+  <!-- D3 INSERT POINT -->
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Cool-down · 5 min</h4>
+      <h3>Unwind the chain.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Easy walk.</b> Drop the heart rate.<span>3 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="68"/>
+              <line x1="92" y1="42" x2="112" y2="42"/>
+              <line x1="100" y1="68" x2="92" y2="98"><animate attributeName="x2" values="86;100;114;100;86" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="100" y1="68" x2="108" y2="98"><animate attributeName="x2" values="114;100;86;100;114" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="92" y1="42" x2="80" y2="62"><animate attributeName="x2" values="74;88;94;88;74" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="112" y1="42" x2="124" y2="62"><animate attributeName="x2" values="130;112;106;112;130" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+            </svg></div>
+            <div class="wup-cue">Walk it off. Get the heart rate down before you stretch.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Pigeon pose.</b> Hip and glute release.<span>60s each side</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <line x1="95" y1="80" x2="130" y2="92"/>
+              <line x1="130" y1="92" x2="172" y2="96"/>
+              <line x1="95" y1="80" x2="72" y2="90"/>
+              <line x1="72" y1="90" x2="35" y2="94"/>
+              <line x1="95" y1="80" x2="90" y2="48"><animate attributeName="y2" values="48;52;48" dur="3.5s" repeatCount="indefinite"/></line>
+              <circle class="head" cx="88" cy="36" r="7"><animate attributeName="cy" values="36;40;36" dur="3.5s" repeatCount="indefinite"/></circle>
+              <line x1="92" y1="52" x2="65" y2="94"><animate attributeName="y1" values="52;56;52" dur="3.5s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">One leg bent in front (shin parallel to your ribs). Other leg long behind. Square the hips, then fold over the front shin.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Standing quad stretch.</b> Pull the ankle back, knees together.<span>45s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="100" cy="14" r="7"/>
+              <line x1="100" y1="21" x2="100" y2="60"/>
+              <line x1="92" y1="32" x2="112" y2="32"/>
+              <line x1="100" y1="60" x2="105" y2="98"/>
+              <line x1="100" y1="60" x2="125" y2="68"/>
+              <line x1="125" y1="68" x2="100" y2="55"/>
+              <line x1="92" y1="32" x2="78" y2="50"/>
+              <line x1="112" y1="32" x2="130" y2="50"/>
+            </svg></div>
+            <div class="wup-cue">Grab the ankle behind you. Keep the knees together and push the hip forward. Feel it down the front of the thigh.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Seated hamstring stretch.</b> Long spine, hinge at the hip.<span>45s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="56" cy="48" r="7"><animate attributeName="cx" values="56;62;56" dur="3.5s" repeatCount="indefinite"/><animate attributeName="cy" values="48;58;48" dur="3.5s" repeatCount="indefinite"/></circle>
+              <line x1="62" y1="52" x2="80" y2="92"><animate attributeName="x1" values="62;68;62" dur="3.5s" repeatCount="indefinite"/><animate attributeName="y1" values="52;62;52" dur="3.5s" repeatCount="indefinite"/></line>
+              <line x1="80" y1="92" x2="170" y2="92"/>
+              <line x1="62" y1="56" x2="130" y2="78"><animate attributeName="x1" values="62;68;62" dur="3.5s" repeatCount="indefinite"/><animate attributeName="y1" values="56;66;56" dur="3.5s" repeatCount="indefinite"/><animate attributeName="x2" values="130;160;130" dur="3.5s" repeatCount="indefinite"/><animate attributeName="y2" values="78;88;78" dur="3.5s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Sit with the leg long. Reach the chest toward the toes — fold from the hip, not the spine. Don't bounce.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Calf stretch.</b> Foot against the wall, drive the heel down.<span>30s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <line class="equip" x1="170" y1="6" x2="170" y2="100"/>
+              <circle class="head" cx="78" cy="22" r="7"/>
+              <line x1="78" y1="29" x2="92" y2="62"/>
+              <line x1="92" y1="62" x2="80" y2="98"/>
+              <line x1="92" y1="62" x2="155" y2="78"/>
+              <line x1="155" y1="78" x2="170" y2="65"/>
+              <line x1="78" y1="36" x2="60" y2="60"/>
+              <line x1="78" y1="36" x2="155" y2="60"/>
+              <line x1="155" y1="60" x2="168" y2="50"/>
+            </svg></div>
+            <div class="wup-cue">Ball of the foot up the wall, heel on the floor. Lean the hips into the wall to drive the calf stretch deeper.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- DAY 4 DELTS -->
+<div class="day" data-day="4">
+  <section class="dark day-head">
+    <h1 class="display">Delts.</h1>
+    <div class="sub">Shoulders, traps, and core. Width, cap, and a bulletproof trunk.</div>
+  </section>
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Warm-up · 6 min</h4>
+      <h3>Open the shoulders. Press nothing cold.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Rowing machine.</b> Easy pace.<span>3 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="equip" cx="180" cy="84" r="10" fill="none"/>
+              <line class="equip" x1="168" y1="86" x2="168" y2="68"/>
+              <rect class="equip" x="70" y="96" width="22" height="5" rx="1" fill="currentColor"><animate attributeName="x" values="75;50;75" dur="2.2s" repeatCount="indefinite"/></rect>
+              <circle class="head" cx="88" cy="38" r="7"><animate attributeName="cx" values="88;62;88" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line x1="88" y1="45" x2="82" y2="90"><animate attributeName="x1" values="88;62;88" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="85" y1="52" x2="150" y2="78"><animate attributeName="x1" values="85;58;85" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <circle class="dot" cx="155" cy="82" r="3"><animate attributeName="cx" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line class="equip" x1="180" y1="84" x2="155" y2="82" stroke-dasharray="2 2"><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="82" y1="90" x2="160" y2="96"><animate attributeName="x1" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Long, smooth strokes. Legs drive first, then hips, then arms. Easy breathing.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Band dislocates.</b> Wide grip, slow, full rotation.<span>2 × 10</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="32" r="8"/>
+              <line x1="100" y1="40" x2="100" y2="88"/>
+              <line x1="88" y1="48" x2="112" y2="48"/>
+              <line x1="100" y1="88" x2="90" y2="108"/>
+              <line x1="100" y1="88" x2="110" y2="108"/>
+              <line x1="88" y1="48" x2="50" y2="55"><animate attributeName="x2" values="50;45;100;50" dur="3.5s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/><animate attributeName="y2" values="55;10;8;55" dur="3.5s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/></line>
+              <line x1="112" y1="48" x2="150" y2="55"><animate attributeName="x2" values="150;155;100;150" dur="3.5s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/><animate attributeName="y2" values="55;10;8;55" dur="3.5s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/></line>
+              <path d="M 50 55 Q 100 30 150 55" stroke-dasharray="3 3" class="equip"><animate attributeName="d" values="M 50 55 Q 100 30 150 55; M 45 10 Q 100 -10 155 10; M 100 8 Q 100 50 100 8; M 50 55 Q 100 30 150 55" dur="3.5s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/></path>
+            </svg></div>
+            <div class="wup-cue">Hold a band wide (shoulders-width + 10"). Bring it overhead, behind the back, and return. Arms straight throughout.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Wall slides.</b> Back flat, elbows glue to the wall.<span>2 × 8</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="equip" x1="60" y1="8" x2="60" y2="108"/>
+              <circle class="head" cx="68" cy="22" r="7"/>
+              <line x1="68" y1="29" x2="68" y2="82"/>
+              <line x1="68" y1="82" x2="72" y2="108"/>
+              <line x1="58" y1="40" x2="85" y2="50"><animate attributeName="x2" values="85;78;85" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y2" values="50;24;50" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="85" y1="50" x2="105" y2="38"><animate attributeName="x1" values="85;78;85" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y1" values="50;24;50" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="105;88;105" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y2" values="38;2;38" dur="2.2s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Back, hips, and head flat to the wall. Slide the forearms up like a goal-post — elbows and wrists stay in contact.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Scapular push-ups.</b> Protract and retract, no elbow bend.<span>2 × 10</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <line x1="40" y1="98" x2="40" y2="70"><animate attributeName="y2" values="70;64;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <circle class="head" cx="28" cy="64" r="7"><animate attributeName="cy" values="64;58;64" dur="2.4s" repeatCount="indefinite"/></circle>
+              <line x1="40" y1="70" x2="130" y2="70"><animate attributeName="y1" values="70;64;70" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y2" values="70;67;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <line x1="130" y1="70" x2="160" y2="88"><animate attributeName="y1" values="70;67;70" dur="2.4s" repeatCount="indefinite"/></line>
+              <line x1="160" y1="88" x2="175" y2="98"/>
+            </svg></div>
+            <div class="wup-cue">Push-up position with locked arms. Only the shoulder blades move. Shoulders come away from the ears at the bottom.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Press ramp sets.</b> Empty bar → 40% → 60% → 80%.<span>8/5/3/3</span></summary>
+          <div class="wup-body">
+            <div class="wup-cue" style="flex:1">Ramp into the first working set. Each set heavier, fewer reps. Press each ramp set with working-weight form — strict, no leg drive.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- MAIN 01: OVERHEAD PRESS -->
+  <section class="dark ex" id="d4e1">
+    <div class="wrap">
+      <div class="ex-num">Movement 01</div>
+      <h3 class="title">Overhead Press.</h3>
+      <div class="sub">Bar at the clavicle, straight up. Head through the window at lockout. Glutes tight.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 290" aria-hidden="true">
+          <line class="floor" x1="20" y1="262" x2="180" y2="262"/>
+          <line x1="85" y1="260" x2="115" y2="260"/>
+          <line x1="100" y1="260" x2="100" y2="215"/>
+          <line x1="100" y1="215" x2="100" y2="168"/>
+          <line x1="100" y1="168" x2="100" y2="90"/>
+          <circle class="head" cx="100" cy="76" r="10"/>
+          <line x1="100" y1="90" x2="90" y2="100">
+            <animate attributeName="x2" values="90;100;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;50;100" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="90" y1="100" x2="90" y2="70">
+            <animate attributeName="x1" values="90;100;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="100;50;100" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="90;100;90" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="70;10;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="62" y1="70" x2="118" y2="70">
+            <animate attributeName="y1" values="70;10;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="70;10;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="62" cy="70" r="9">
+            <animate attributeName="cy" values="70;10;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="118" cy="70" r="9">
+            <animate attributeName="cy" values="70;10;70" dur="2.4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×6-8</b><span>Sets × Reps</span></div>
+        <div><b>2:30</b><span>Rest</span></div>
+        <div><b>RPE 8</b><span>Effort</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Bar on the clavicle. Elbows just under and in front of the bar.</li>
+        <li><b>2.</b> Squeeze glutes, brace core. Don't let the ribs flare.</li>
+        <li><b>3.</b> Press up, then pull the head through at lockout. Bar over the mid-foot.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: seated DB shoulder press against a bench. Lifetime: landmine press for shoulder-friendly days.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 02: CABLE LATERAL RAISE -->
+  <section class="light ex" id="d4e2">
+    <div class="wrap">
+      <div class="ex-num">Movement 02</div>
+      <h3 class="title">Cable Lateral Raise.</h3>
+      <div class="sub">Lead with the elbow. Stop at shoulder height. Slow all the way down.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="78" y1="250" x2="98" y2="250"/>
+          <line x1="102" y1="250" x2="122" y2="250"/>
+          <circle class="head" cx="100" cy="40" r="10"/>
+          <line x1="100" y1="52" x2="100" y2="150"/>
+          <line x1="80" y1="60" x2="120" y2="60"/>
+          <line x1="100" y1="150" x2="90" y2="210"/>
+          <line x1="90" y1="210" x2="88" y2="250"/>
+          <line x1="100" y1="150" x2="110" y2="210"/>
+          <line x1="110" y1="210" x2="112" y2="250"/>
+          <line x1="80" y1="60" x2="76" y2="100">
+            <animate attributeName="x2" values="76;46;76" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;60;100" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="76" y1="100" x2="72" y2="140">
+            <animate attributeName="x1" values="76;46;76" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="100;60;100" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="72;12;72" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="140;60;140" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="120" y1="60" x2="124" y2="100">
+            <animate attributeName="x2" values="124;154;124" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="100;60;100" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="124" y1="100" x2="128" y2="140">
+            <animate attributeName="x1" values="124;154;124" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="100;60;100" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="128;188;128" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="140;60;140" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="dot" cx="72" cy="140" r="4">
+            <animate attributeName="cx" values="72;12;72" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="140;60;140" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="dot" cx="128" cy="140" r="4">
+            <animate attributeName="cx" values="128;188;128" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="140;60;140" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×12-15</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>3s</b><span>Down</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Cable low, slight lean toward the working side. Hand starts across the body.</li>
+        <li><b>2.</b> Raise with the elbow — wrist and hand stay below it the whole way.</li>
+        <li><b>3.</b> Peak at shoulder height, not above. Three seconds to lower.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: DB lateral raise — same reps, slightly lighter. Both gyms: use cable when possible (constant tension).</div>
+    </div>
+  </section>
+
+  <!-- MAIN 03: REAR DELT FLY -->
+  <section class="dark ex" id="d4e3">
+    <div class="wrap">
+      <div class="ex-num">Movement 03</div>
+      <h3 class="title">Rear Delt Fly.</h3>
+      <div class="sub">Bent over at the hips. Arms sweep out to the sides, pinky up at the top.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="108" y2="202"/>
+          <line x1="108" y1="202" x2="80" y2="180"/>
+          <line x1="80" y1="180" x2="150" y2="145"/>
+          <circle class="head" cx="160" cy="132" r="10"/>
+          <line x1="150" y1="145" x2="150" y2="185">
+            <animate attributeName="x2" values="150;112;150" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="185;118;185" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="150" y1="185" x2="150" y2="225">
+            <animate attributeName="x1" values="150;112;150" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="185;118;185" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="150;74;150" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="225;90;225" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="dot" cx="150" cy="225" r="5">
+            <animate attributeName="cx" values="150;74;150" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="225;90;225" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12-15</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>Slow</b><span>Tempo</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Bent over ~45°. Chest up, flat back, soft knees.</li>
+        <li><b>2.</b> Lead with the pinky. Sweep wide — don't row.</li>
+        <li><b>3.</b> Peak when arms are parallel to the floor. Squeeze, then lower.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: chest-supported on an incline bench (eliminates low-back fatigue). Lifetime: reverse pec-deck — constant tension.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 04: DUMBBELL SHRUG -->
+  <section class="light ex" id="d4e4">
+    <div class="wrap">
+      <div class="ex-num">Movement 04</div>
+      <h3 class="title">Dumbbell Shrug.</h3>
+      <div class="sub">Shoulders straight up to the ears. Hold one second at the top. No rolling.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="78" y1="250" x2="98" y2="250"/>
+          <line x1="102" y1="250" x2="122" y2="250"/>
+          <circle class="head" cx="100" cy="50" r="10"/>
+          <line x1="100" y1="62" x2="100" y2="150"/>
+          <line x1="100" y1="150" x2="90" y2="210"/>
+          <line x1="90" y1="210" x2="88" y2="250"/>
+          <line x1="100" y1="150" x2="110" y2="210"/>
+          <line x1="110" y1="210" x2="112" y2="250"/>
+          <line x1="82" y1="72" x2="118" y2="72">
+            <animate attributeName="y1" values="72;60;72" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="72;60;72" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="80" y1="72" x2="76" y2="160">
+            <animate attributeName="y1" values="72;60;72" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="160;148;160" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="120" y1="72" x2="124" y2="160">
+            <animate attributeName="y1" values="72;60;72" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="160;148;160" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <rect class="equip" x="68" y="154" width="16" height="20" rx="2" fill="currentColor">
+            <animate attributeName="y" values="154;142;154" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+          <rect class="equip" x="116" y="154" width="16" height="20" rx="2" fill="currentColor">
+            <animate attributeName="y" values="154;142;154" dur="1.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>1s</b><span>Squeeze</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Heavy dumbbells at your sides. Chin tucked, chest proud.</li>
+        <li><b>2.</b> Elevate the shoulders straight up — don't roll them.</li>
+        <li><b>3.</b> Hold one second at the top. Lower with control.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: barbell shrug in front of the body. Lifetime: trap-bar shrug for the heaviest loads.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 05: PLANK -->
+  <section class="dark ex" id="d4e5">
+    <div class="wrap">
+      <div class="ex-num">Movement 05</div>
+      <h3 class="title">Weighted Plank.</h3>
+      <div class="sub">Forearms down, body flat as a board. Glutes squeezed. Plate on the back if it's easy.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="30" y1="250" x2="62" y2="250"/>
+          <line x1="62" y1="250" x2="62" y2="220">
+            <animate attributeName="y2" values="220;218;220;222;220" dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.3;0.5;0.8;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/>
+          </line>
+          <circle class="head" cx="54" cy="212" r="10">
+            <animate attributeName="cy" values="212;210;212;214;212" dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.3;0.5;0.8;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/>
+          </circle>
+          <line x1="62" y1="220" x2="142" y2="224">
+            <animate attributeName="y1" values="220;218;220;222;220" dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.3;0.5;0.8;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/>
+            <animate attributeName="y2" values="224;222;224;226;224" dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.3;0.5;0.8;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/>
+          </line>
+          <line x1="142" y1="224" x2="168" y2="242">
+            <animate attributeName="y1" values="224;222;224;226;224" dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.3;0.5;0.8;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/>
+          </line>
+          <line x1="168" y1="242" x2="172" y2="250"/>
+          <rect class="equip" x="92" y="210" width="26" height="12" rx="2" fill="currentColor">
+            <animate attributeName="y" values="210;208;210;212;210" dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.3;0.5;0.8;1" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×45s</b><span>Sets × Hold</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>Tight</b><span>Glutes</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Forearms under shoulders. Hands relaxed, not clenched.</li>
+        <li><b>2.</b> Glutes squeezed hard, tuck the pelvis — no sagging hips or raised butt.</li>
+        <li><b>3.</b> Breathe shallow and steady. Add a plate when you can hold 60s clean.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: cable crunch (kneeling, rope at the back of the neck) — 3×15 for dynamic core work. Lifetime: ab-wheel rollouts for advanced.</div>
+    </div>
+  </section>
+
+  <!-- D4 INSERT POINT -->
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Cool-down · 4 min</h4>
+      <h3>Decompress. Stretch the cap.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Easy walk.</b> Drop the heart rate.<span>2 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="68"/>
+              <line x1="92" y1="42" x2="112" y2="42"/>
+              <line x1="100" y1="68" x2="92" y2="98"><animate attributeName="x2" values="86;100;114;100;86" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="100" y1="68" x2="108" y2="98"><animate attributeName="x2" values="114;100;86;100;114" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="92" y1="42" x2="80" y2="62"><animate attributeName="x2" values="74;88;94;88;74" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="112" y1="42" x2="124" y2="62"><animate attributeName="x2" values="130;112;106;112;130" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+            </svg></div>
+            <div class="wup-cue">Walk it off. Get the heart rate down.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Shoulder cross-body stretch.</b> Arm across chest, pull with the other.<span>30s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="78"/>
+              <line x1="88" y1="38" x2="112" y2="38"/>
+              <line x1="88" y1="38" x2="140" y2="48"><animate attributeName="x2" values="138;142;138" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="112" y1="38" x2="135" y2="58"><animate attributeName="x2" values="135;138;135" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Pull one arm across the chest at shoulder height. The other hand on the elbow gently increases the stretch.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Doorway chest stretch.</b> Arm on the frame, rotate away.<span>45s each side</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="equip" x1="50" y1="6" x2="50" y2="105"/>
+              <circle class="head" cx="92" cy="32" r="7"><animate attributeName="cy" values="32;33;32" dur="3s" repeatCount="indefinite"/></circle>
+              <line x1="92" y1="39" x2="98" y2="78"/>
+              <line x1="92" y1="48" x2="50" y2="34"/>
+              <line x1="92" y1="48" x2="118" y2="60"/>
+              <line x1="98" y1="78" x2="92" y2="105"/>
+              <line x1="98" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Forearm on the doorframe, elbow at shoulder height. Step through and rotate away.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Neck side-to-side stretch.</b> Slow, gentle.<span>20s each direction</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="8"><animate attributeName="cx" values="100;90;100;110;100" dur="4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></circle>
+              <line x1="100" y1="30" x2="100" y2="78"><animate attributeName="x1" values="100;94;100;106;100" dur="4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="88" y1="38" x2="112" y2="38"/>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Drop the right ear toward the right shoulder, hold. Switch. Don't shrug — let the neck lengthen.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- DAY 5 ARMS -->
+<div class="day" data-day="5">
+  <section class="dark day-head">
+    <h1 class="display">Arms.</h1>
+    <div class="sub">Biceps, triceps, forearms. Low-fatigue day that still adds real size.</div>
+  </section>
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Warm-up · 5 min</h4>
+      <h3>Mobilise elbows and wrists.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Rowing machine.</b> Easy pace.<span>3 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="equip" cx="180" cy="84" r="10" fill="none"/>
+              <line class="equip" x1="168" y1="86" x2="168" y2="68"/>
+              <rect class="equip" x="70" y="96" width="22" height="5" rx="1" fill="currentColor"><animate attributeName="x" values="75;50;75" dur="2.2s" repeatCount="indefinite"/></rect>
+              <circle class="head" cx="88" cy="38" r="7"><animate attributeName="cx" values="88;62;88" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line x1="88" y1="45" x2="82" y2="90"><animate attributeName="x1" values="88;62;88" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="85" y1="52" x2="150" y2="78"><animate attributeName="x1" values="85;58;85" dur="2.2s" repeatCount="indefinite"/><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <circle class="dot" cx="155" cy="82" r="3"><animate attributeName="cx" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></circle>
+              <line class="equip" x1="180" y1="84" x2="155" y2="82" stroke-dasharray="2 2"><animate attributeName="x2" values="155;85;155" dur="2.2s" repeatCount="indefinite"/></line>
+              <line x1="82" y1="90" x2="160" y2="96"><animate attributeName="x1" values="82;58;82" dur="2.2s" repeatCount="indefinite"/></line>
+            </svg></div>
+            <div class="wup-cue">Long, smooth strokes. Legs drive first, then hips, then arms.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Band pull-aparts.</b> Chest high.<span>2 × 15</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="8"/>
+              <line x1="100" y1="30" x2="100" y2="82"/>
+              <line x1="88" y1="40" x2="112" y2="40"/>
+              <line x1="100" y1="82" x2="90" y2="105"/>
+              <line x1="100" y1="82" x2="110" y2="105"/>
+              <line x1="88" y1="40" x2="60" y2="50"><animate attributeName="x2" values="70;30;70" dur="1.6s" repeatCount="indefinite"/><animate attributeName="y2" values="52;48;52" dur="1.6s" repeatCount="indefinite"/></line>
+              <line x1="112" y1="40" x2="140" y2="50"><animate attributeName="x2" values="130;170;130" dur="1.6s" repeatCount="indefinite"/><animate attributeName="y2" values="52;48;52" dur="1.6s" repeatCount="indefinite"/></line>
+              <path d="M 70 52 Q 100 60 130 52" stroke-dasharray="3 3" class="equip"><animate attributeName="d" values="M 70 52 Q 100 60 130 52; M 30 48 Q 100 75 170 48; M 70 52 Q 100 60 130 52" dur="1.6s" repeatCount="indefinite"/></path>
+            </svg></div>
+            <div class="wup-cue">Arms straight, no shrug. Pull the band until it touches the chest. Slow return.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Wrist and elbow circles.</b> Big, slow.<span>30s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="18" r="7"/>
+              <line x1="100" y1="25" x2="100" y2="70"/>
+              <line x1="100" y1="32" x2="80" y2="45"/>
+              <line x1="80" y1="45" x2="60" y2="60"><animate attributeName="x2" values="60;50;60;70;60" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/><animate attributeName="y2" values="60;50;40;50;60" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="100" y1="32" x2="120" y2="45"/>
+              <line x1="120" y1="45" x2="140" y2="60"><animate attributeName="x2" values="140;150;140;130;140" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/><animate attributeName="y2" values="60;50;40;50;60" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <circle class="dot" cx="60" cy="60" r="3"><animate attributeName="cx" values="60;50;60;70;60" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/><animate attributeName="cy" values="60;50;40;50;60" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></circle>
+              <circle class="dot" cx="140" cy="60" r="3"><animate attributeName="cx" values="140;150;140;130;140" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/><animate attributeName="cy" values="60;50;40;50;60" dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></circle>
+            </svg></div>
+            <div class="wup-cue">Big circles with the fists — wrists first, then elbows. Both directions, both joints.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Ramp-up set.</b> Empty bar or light weight on the first lift.<span>1 × 12</span></summary>
+          <div class="wup-body">
+            <div class="wup-cue" style="flex:1">One light, easy set on the day's first movement. No strain — this is nervous-system priming, not fatigue.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- MAIN 01: CLOSE-GRIP BENCH -->
+  <section class="dark ex" id="d5e1">
+    <div class="wrap">
+      <div class="ex-num">Movement 01</div>
+      <h3 class="title">Close-Grip Bench Press.</h3>
+      <div class="sub">Shoulder-width grip. Elbows tucked tight. The triceps take over from the chest.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="28" y="176" width="138" height="6" rx="2" fill="currentColor"/>
+          <line class="equip" x1="34" y1="182" x2="34" y2="250"/>
+          <line class="equip" x1="160" y1="182" x2="160" y2="250"/>
+          <circle class="head" cx="42" cy="166" r="10"/>
+          <line x1="52" y1="172" x2="130" y2="174"/>
+          <line x1="130" y1="174" x2="152" y2="218"/>
+          <line x1="152" y1="218" x2="146" y2="250"/>
+          <line x1="52" y1="172" x2="52" y2="132">
+            <animate attributeName="x2" values="52;62;52" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="132;148;132" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line x1="52" y1="132" x2="52" y2="92">
+            <animate attributeName="x1" values="52;62;52" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="132;148;132" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="92;168;92" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="32" y1="92" x2="72" y2="92">
+            <animate attributeName="y1" values="92;168;92" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="92;168;92" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="32" cy="92" r="8">
+            <animate attributeName="cy" values="92;168;92" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="72" cy="92" r="8">
+            <animate attributeName="cy" values="92;168;92" dur="2.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×8</b><span>Sets × Reps</span></div>
+        <div><b>2:00</b><span>Rest</span></div>
+        <div><b>Tight</b><span>Elbows</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Grip just inside the shoulders. Wrists stacked over the elbows.</li>
+        <li><b>2.</b> Elbows stay tucked to your ribs the entire way down.</li>
+        <li><b>3.</b> Bar lowers to the lower sternum, then press and lock out.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: floor press (same grip) — saves the shoulders on heavy days. Lifetime: board press or Swiss bar if available.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 02: SKULLCRUSHER -->
+  <section class="light ex" id="d5e2">
+    <div class="wrap">
+      <div class="ex-num">Movement 02</div>
+      <h3 class="title">Skullcrusher.</h3>
+      <div class="sub">Upper arms vertical. Bar comes down behind the head, not to the forehead. Long-head stretch.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="28" y="176" width="138" height="6" rx="2" fill="currentColor"/>
+          <line class="equip" x1="34" y1="182" x2="34" y2="250"/>
+          <line class="equip" x1="160" y1="182" x2="160" y2="250"/>
+          <circle class="head" cx="42" cy="166" r="10"/>
+          <line x1="52" y1="172" x2="130" y2="174"/>
+          <line x1="130" y1="174" x2="152" y2="218"/>
+          <line x1="152" y1="218" x2="146" y2="250"/>
+          <line x1="52" y1="172" x2="52" y2="92"/>
+          <line x1="52" y1="92" x2="52" y2="52">
+            <animate attributeName="x2" values="52;15;52" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="52;100;52" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="22" y1="52" x2="82" y2="52">
+            <animate attributeName="x1" values="22;-15;22" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="82;45;82" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="52;100;52" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="52;100;52" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="22" cy="52" r="7">
+            <animate attributeName="cx" values="22;-15;22" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="52;100;52" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="82" cy="52" r="7">
+            <animate attributeName="cx" values="82;45;82" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="52;100;52" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×10</b><span>Sets × Reps</span></div>
+        <div><b>90s</b><span>Rest</span></div>
+        <div><b>Deep</b><span>Stretch</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Lie flat. Upper arms perfectly vertical — don't let them drift toward the face.</li>
+        <li><b>2.</b> Lower the bar behind the head (to the bench), not to the forehead.</li>
+        <li><b>3.</b> Press up until elbows lock. Full tricep contraction at the top.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: DB "JM press" variation — easier on elbows. Lifetime: EZ-bar if wrists complain, or use cables for constant tension.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 02: EZ-BAR CURL -->
+  <section class="dark ex" id="d5e3">
+    <div class="wrap">
+      <div class="ex-num">Movement 03</div>
+      <h3 class="title">EZ-Bar Curl.</h3>
+      <div class="sub">Bent bar — kinder on the wrists. Elbows pinned, strict curls.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="100" y2="200"/>
+          <line x1="100" y1="200" x2="100" y2="150"/>
+          <line x1="100" y1="150" x2="100" y2="70"/>
+          <circle class="head" cx="100" cy="56" r="10"/>
+          <line x1="100" y1="70" x2="100" y2="110"/>
+          <line x1="100" y1="110" x2="100" y2="150">
+            <animate attributeName="x2" values="100;92;100" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;78;150" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <path d="M 78 152 Q 100 162 122 152">
+            <animate attributeName="d" values="M 78 152 Q 100 162 122 152; M 70 80 Q 92 90 114 80; M 78 152 Q 100 162 122 152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </path>
+          <circle class="plate" cx="78" cy="152" r="7">
+            <animate attributeName="cx" values="78;70;78" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="122" cy="152" r="7">
+            <animate attributeName="cx" values="122;114;122" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>4×8-10</b><span>Sets × Reps</span></div>
+        <div><b>1:30</b><span>Rest</span></div>
+        <div><b>Strict</b><span>Form</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Shoulder-width grip on the narrow bend. Elbows tight to the ribs.</li>
+        <li><b>2.</b> Curl without swinging. If the elbows shift forward, go lighter.</li>
+        <li><b>3.</b> Full extension at the bottom, full contraction at the top.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: standing DB curl with strict form. Lifetime: preacher curl machine for extra elbow stability.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 04: PREACHER CURL -->
+  <section class="light ex" id="d5e4">
+    <div class="wrap">
+      <div class="ex-num">Movement 04</div>
+      <h3 class="title">Preacher Curl.</h3>
+      <div class="sub">Upper arms pinned to the pad. The short head of the biceps can't hide — strict, deep curl.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <rect class="equip" x="25" y="228" width="45" height="8" rx="2" fill="currentColor"/>
+          <line class="equip" x1="28" y1="236" x2="28" y2="252"/>
+          <line class="equip" x1="64" y1="236" x2="64" y2="252"/>
+          <line class="equip" x1="55" y1="152" x2="138" y2="200"/>
+          <line class="equip" x1="55" y1="160" x2="138" y2="208"/>
+          <line class="equip" x1="138" y1="200" x2="138" y2="252"/>
+          <line x1="75" y1="250" x2="50" y2="232"/>
+          <line x1="50" y1="232" x2="50" y2="168"/>
+          <circle class="head" cx="50" cy="154" r="10"/>
+          <line x1="50" y1="168" x2="90" y2="180"/>
+          <line x1="90" y1="180" x2="115" y2="210">
+            <animate attributeName="x2" values="115;65;115" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="210;160;210" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <rect class="equip" x="108" y="206" width="22" height="10" rx="2" fill="currentColor">
+            <animate attributeName="x" values="108;58;108" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y" values="206;156;206" dur="2.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×10-12</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>Full</b><span>Stretch</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Chest and armpits against the pad. Upper arms locked to the angle.</li>
+        <li><b>2.</b> Fully extend at the bottom — don't cheat the stretch. Elbows stay on the pad.</li>
+        <li><b>3.</b> Curl until the forearm is vertical. Squeeze, then lower for a count of three.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: single-arm DB preacher over an incline bench. Lifetime: preacher machine with cable or plate-loaded arm.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 05: HAMMER CURL -->
+  <section class="dark ex" id="d5e5">
+    <div class="wrap">
+      <div class="ex-num">Movement 05</div>
+      <h3 class="title">Hammer Curl.</h3>
+      <div class="sub">Neutral grip — thumbs up. Builds the brachialis and the brachioradialis (size under the biceps, and forearms).</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="100" y2="200"/>
+          <line x1="100" y1="200" x2="100" y2="150"/>
+          <line x1="100" y1="150" x2="100" y2="70"/>
+          <circle class="head" cx="100" cy="56" r="10"/>
+          <line x1="100" y1="70" x2="100" y2="110"/>
+          <line x1="100" y1="110" x2="100" y2="150">
+            <animate attributeName="x2" values="100;92;100" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;78;150" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <rect class="equip" x="92" y="144" width="16" height="20" rx="2" fill="currentColor">
+            <animate attributeName="x" values="92;84;92" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y" values="144;72;144" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12</b><span>Sets × Reps</span></div>
+        <div><b>60s</b><span>Rest</span></div>
+        <div><b>Strict</b><span>Form</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Dumbbells at your sides, thumbs forward. Palms face each other.</li>
+        <li><b>2.</b> Curl with zero elbow drift. Squeeze at the top.</li>
+        <li><b>3.</b> Lower slowly. Full arm extension at the bottom of every rep.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: same lift — dumbbells at both gyms. Lifetime: cross-body hammer curl for brachialis emphasis.</div>
+    </div>
+  </section>
+
+  <!-- MAIN 06: REVERSE CURL -->
+  <section class="light ex" id="d5e6">
+    <div class="wrap">
+      <div class="ex-num">Movement 06</div>
+      <h3 class="title">Reverse Curl.</h3>
+      <div class="sub">Palms down. Hits the brachioradialis and forearms. Lighter than a regular curl — expect it.</div>
+      <div class="ex-fig fig">
+        <svg viewBox="0 0 200 280" aria-hidden="true">
+          <line class="floor" x1="20" y1="252" x2="180" y2="252"/>
+          <line x1="85" y1="250" x2="115" y2="250"/>
+          <line x1="100" y1="250" x2="100" y2="200"/>
+          <line x1="100" y1="200" x2="100" y2="150"/>
+          <line x1="100" y1="150" x2="100" y2="70"/>
+          <circle class="head" cx="100" cy="56" r="10"/>
+          <line x1="100" y1="70" x2="100" y2="110"/>
+          <line x1="100" y1="110" x2="100" y2="150">
+            <animate attributeName="x2" values="100;92;100" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="150;78;150" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <line class="bar" x1="78" y1="152" x2="122" y2="152">
+            <animate attributeName="x1" values="78;70;78" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="x2" values="122;114;122" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y1" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="y2" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </line>
+          <circle class="plate" cx="78" cy="152" r="7">
+            <animate attributeName="cx" values="78;70;78" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+          <circle class="plate" cx="122" cy="152" r="7">
+            <animate attributeName="cx" values="122;114;122" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+            <animate attributeName="cy" values="152;80;152" dur="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.25 1; 0.45 0 0.25 1"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="stats">
+        <div><b>3×12-15</b><span>Sets × Reps</span></div>
+        <div><b>45s</b><span>Rest</span></div>
+        <div><b>Strict</b><span>Form</span></div>
+      </div>
+      <ul class="cues">
+        <li><b>1.</b> Overhand grip — knuckles up. EZ-bar or straight bar.</li>
+        <li><b>2.</b> Curl without swinging. The forearm does more work here than the biceps.</li>
+        <li><b>3.</b> Finish with a squeeze at the top, then slow on the way down.</li>
+      </ul>
+      <div class="swap"><b>Swap.</b> Work Gym: DB reverse curl. Lifetime: cable rope reverse curl for constant tension.</div>
+    </div>
+  </section>
+
+  <!-- D5 INSERT POINT -->
+
+  <section class="dark"><div class="wrap">
+    <div class="block">
+      <h4>Cool-down · 3 min</h4>
+      <h3>Open the elbows and wrists.</h3>
+      <div class="wups">
+        <details class="wup">
+          <summary><b>Easy walk.</b> Drop the heart rate.<span>2 min</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="ref" x1="10" y1="100" x2="190" y2="100"/>
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="68"/>
+              <line x1="92" y1="42" x2="112" y2="42"/>
+              <line x1="100" y1="68" x2="92" y2="98"><animate attributeName="x2" values="86;100;114;100;86" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="100" y1="68" x2="108" y2="98"><animate attributeName="x2" values="114;100;86;100;114" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="92" y1="42" x2="80" y2="62"><animate attributeName="x2" values="74;88;94;88;74" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+              <line x1="112" y1="42" x2="124" y2="62"><animate attributeName="x2" values="130;112;106;112;130" dur="1.6s" repeatCount="indefinite" keyTimes="0;0.25;0.5;0.75;1"/></line>
+            </svg></div>
+            <div class="wup-cue">Walk it off.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Triceps overhead stretch.</b> Reach down the back, pull the elbow.<span>30s each arm</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="22" r="7"/>
+              <line x1="100" y1="29" x2="100" y2="78"/>
+              <line x1="88" y1="38" x2="112" y2="38"/>
+              <line x1="88" y1="38" x2="78" y2="20"/>
+              <line x1="78" y1="20" x2="92" y2="44"/>
+              <line x1="112" y1="38" x2="120" y2="20"/>
+              <line x1="120" y1="20" x2="84" y2="22"><animate attributeName="x2" values="84;78;84" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">One arm bent overhead. The other hand pulls that elbow gently toward the centerline.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Biceps wall stretch.</b> Palm on the wall, rotate away.<span>30s each</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <line class="equip" x1="50" y1="6" x2="50" y2="105"/>
+              <circle class="head" cx="100" cy="32" r="7"><animate attributeName="cx" values="100;104;100" dur="3s" repeatCount="indefinite"/></circle>
+              <line x1="100" y1="39" x2="100" y2="78"><animate attributeName="x1" values="100;104;100" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="92" y1="48" x2="50" y2="42"/>
+              <line x1="108" y1="48" x2="120" y2="68"/>
+              <line x1="100" y1="78" x2="92" y2="105"/>
+              <line x1="100" y1="78" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Palm on the wall, fingers pointing back. Rotate the body slowly away from the wall.</div>
+          </div>
+        </details>
+        <details class="wup">
+          <summary><b>Wrist flexor/extensor stretch.</b> Both directions.<span>20s each direction</span></summary>
+          <div class="wup-body">
+            <div class="wup-fig"><svg viewBox="0 0 200 110">
+              <circle class="head" cx="100" cy="18" r="7"/>
+              <line x1="100" y1="25" x2="100" y2="65"/>
+              <line x1="92" y1="32" x2="108" y2="32"/>
+              <line x1="100" y1="42" x2="135" y2="55"/>
+              <line x1="135" y1="55" x2="160" y2="42"><animate attributeName="x2" values="160;165;145;160" dur="3s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/><animate attributeName="y2" values="42;65;65;42" dur="3s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/></line>
+              <line x1="160" y1="42" x2="120" y2="50"><animate attributeName="x1" values="160;165;145;160" dur="3s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/><animate attributeName="y1" values="42;65;65;42" dur="3s" repeatCount="indefinite" keyTimes="0;0.33;0.66;1"/></line>
+              <line x1="100" y1="65" x2="92" y2="105"/>
+              <line x1="100" y1="65" x2="108" y2="105"/>
+            </svg></div>
+            <div class="wup-cue">Arm extended forward. Pull the fingers up (extensor stretch), then down (flexor stretch). Hold both directions.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+
+<script>
+(function(){
+  const bar=document.getElementById('dayBar');
+  const pills=bar.querySelectorAll('.pill');
+  const days=document.querySelectorAll('.day');
+  function show(n){
+    pills.forEach(p=>p.classList.toggle('active',p.dataset.day===n));
+    days.forEach(d=>d.classList.toggle('active',d.dataset.day===n));
+    window.scrollTo({top:0,behavior:'instant'});
+    try{localStorage.setItem('home.day',n)}catch(e){}
+  }
+  pills.forEach(p=>p.addEventListener('click',()=>show(p.dataset.day)));
+  try{const s=localStorage.getItem('home.day');if(s)show(s);}catch(e){}
+})();
+</script>
+
+</body>
+</html>
